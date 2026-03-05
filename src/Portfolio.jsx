@@ -97,7 +97,7 @@ const TIMELINE_DATA = [
     products: [],
     link: "https://x.com/southernlabs",
     glowColor: "rgba(59, 130, 246, 0.2)",
-    logo: "/logos/southern.webp",
+    logo: "/logos/southern.jpg",
   },
 ];
 
@@ -113,7 +113,7 @@ const PROJECTS = [
       { label: "Tasks Coordinated", value: "200+" },
     ],
     color: "#eab308",
-    banner: "/banners/rewardshq.webp",
+    banner: "/banners/rewardshq.jpg",
     link: "https://x.com/RewardsHQ",
   },
   {
@@ -127,7 +127,7 @@ const PROJECTS = [
       { label: "Reporting Time Cut", value: "80%" },
     ],
     color: "#f59e0b",
-    banner: "/banners/shards.webp",
+    banner: "/banners/shards.jpg",
     link: "https://x.com/shardsofficial",
   },
   {
@@ -139,7 +139,7 @@ const PROJECTS = [
       { label: "Timeframe", value: "48 hrs" },
     ],
     color: "#a855f7",
-    banner: "/banners/meyreal.webp",
+    banner: "/banners/meyreal.jpg",
     link: "https://x.com/meyreal_io",
   },
   {
@@ -152,7 +152,7 @@ const PROJECTS = [
       { label: "Tokens Launched", value: "260+" },
     ],
     color: "#ec4899",
-    banner: "/banners/verse8.webp",
+    banner: "/banners/verse8.jpg",
     link: "https://x.com/verse_eight",
   },
   {
@@ -164,7 +164,7 @@ const PROJECTS = [
       { label: "Assets Produced", value: "230+" },
     ],
     color: "#f97316",
-    banner: "/banners/southlocker.webp",
+    banner: "/banners/southlocker.jpg",
     link: "https://www.instagram.com/southlocker",
   },
   {

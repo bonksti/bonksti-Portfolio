@@ -618,14 +618,7 @@ function ContactSection({ t, isMobile, theme }) {
           Marketing & ops professional with 3+ years experience. Currently studying CS and open to new opportunities.
         </p>
         <ContactList t={t} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
-        {/* Social icons on mobile at bottom */}
-        <div style={{ marginTop: "28px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          {SOCIALS.map((s) => (
-            <a key={s.title} href={s.link} target="_blank" rel="noopener noreferrer" title={s.title} style={{ width: "44px", height: "44px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", background: t.cardBg, border: `1px solid ${t.border}` }}>
-              <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: 0.7, filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
-            </a>
-          ))}
-        </div>
+
       </div>
     );
   }

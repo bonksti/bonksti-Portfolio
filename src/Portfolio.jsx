@@ -9,33 +9,37 @@ const THEMES = {
     accentGlow: "rgba(59, 130, 246, 0.12)",
     accentGlowStrong: "rgba(59, 130, 246, 0.25)",
     text: "#f0f0f0",
-    textSecondary: "#c0c0c0",
-    textMuted: "#777777",
-    textDim: "#444444",
-    border: "#1a1a1a",
-    cardBg: "rgba(255,255,255,0.025)",
+    textSecondary: "#d0d0d0",
+    textMuted: "#aaaaaa",
+    textDim: "#888888",
+    border: "#2a2a2a",
+    cardBg: "rgba(255,255,255,0.04)",
     gradientTop: "#050505",
-    silver: "#a8a8a8",
+    silver: "#c0c0c0",
     blobColor: "rgba(59, 130, 246, 0.07)",
     gridColor: "rgba(255,255,255,0.03)",
+    navInactive: "#bbbbbb",
+    attribution: "#999999",
   },
   light: {
     bg: "#f5f5f5",
     surface: "#ffffff",
-    accent: "#3b82f6",
-    accentDim: "#2563eb",
-    accentGlow: "rgba(59, 130, 246, 0.08)",
-    accentGlowStrong: "rgba(59, 130, 246, 0.18)",
+    accent: "#2563eb",
+    accentDim: "#1d4ed8",
+    accentGlow: "rgba(37, 99, 235, 0.08)",
+    accentGlowStrong: "rgba(37, 99, 235, 0.18)",
     text: "#111111",
     textSecondary: "#333333",
-    textMuted: "#666666",
-    textDim: "#aaaaaa",
-    border: "#e0e0e0",
-    cardBg: "rgba(0,0,0,0.02)",
+    textMuted: "#555555",
+    textDim: "#666666",
+    border: "#d8d8d8",
+    cardBg: "rgba(0,0,0,0.025)",
     gradientTop: "#f5f5f5",
-    silver: "#666666",
-    blobColor: "rgba(59, 130, 246, 0.06)",
+    silver: "#444444",
+    blobColor: "rgba(37, 99, 235, 0.06)",
     gridColor: "rgba(0,0,0,0.04)",
+    navInactive: "#444444",
+    attribution: "#555555",
   },
 };
 
@@ -271,12 +275,39 @@ function SocialBar({ t, theme, isMobile }) {
     <div style={{ position: "fixed", bottom: "28px", left: "32px", display: "flex", flexDirection: "column", gap: "6px", zIndex: 50 }}>
       <div style={{ display: "flex", gap: "8px" }}>
         {SOCIALS.map((s, i) => (
-          <a key={s.title} href={s.link} target="_blank" rel="noopener noreferrer" title={s.title} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ width: "40px", height: "40px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", background: hovered === i ? t.accentGlow : t.cardBg, border: `1px solid ${hovered === i ? t.accent + "40" : t.border}`, transition: "all 0.25s ease", transform: hovered === i ? "translateY(-3px)" : "none" }}>
-            <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: hovered === i ? 1 : 0.5, transition: "opacity 0.25s ease", filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
+          <a
+            key={s.title}
+            href={s.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={s.title}
+            aria-label={s.title}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              width: "44px",
+              height: "44px",
+              borderRadius: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none",
+              background: hovered === i ? t.accentGlow : t.cardBg,
+              border: `1px solid ${hovered === i ? t.accent + "40" : t.border}`,
+              transition: "all 0.25s ease",
+              transform: hovered === i ? "translateY(-3px)" : "none"
+            }}
+          >
+            <img src={s.icon} alt="" aria-hidden="true" style={{ width: "20px", height: "20px", opacity: hovered === i ? 1 : 0.7, transition: "opacity 0.25s ease", filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
           </a>
         ))}
       </div>
-      <a href="https://www.flaticon.com/authors/freepik" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'DM Mono', monospace", fontSize: "8px", color: t.textDim, textDecoration: "none", opacity: 0.4, letterSpacing: "0.3px" }}>
+      <a
+        href="https://www.flaticon.com/authors/freepik"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.attribution, textDecoration: "none", letterSpacing: "0.3px" }}
+      >
         Icons by Freepik — Flaticon
       </a>
     </div>
@@ -286,19 +317,64 @@ function SocialBar({ t, theme, isMobile }) {
 function Nav({ active, onNavigate, theme, toggleTheme, t, isMobile }) {
   const tabs = ["Timeline", "Projects", "Contact"];
   return (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "12px 16px" : "16px 32px", background: `linear-gradient(to bottom, ${t.gradientTop} 50%, transparent)`, backdropFilter: "blur(12px)" }}>
-      <div style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "15px" : "18px", fontWeight: 500, color: t.text, letterSpacing: "-0.3px", minWidth: isMobile ? "auto" : "180px" }}>
+    <nav
+      role="navigation"
+      aria-label="Main navigation"
+      style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: isMobile ? "12px 16px" : "16px 32px",
+        background: `linear-gradient(to bottom, ${t.gradientTop} 50%, transparent)`,
+        backdropFilter: "blur(12px)"
+      }}
+    >
+      <div style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "15px" : "clamp(16px, 1.4vw, 22px)", fontWeight: 500, color: t.text, letterSpacing: "-0.3px", minWidth: isMobile ? "auto" : "180px" }}>
         Basti De Luna
       </div>
       <div style={{ display: "flex", gap: "2px", background: t.cardBg, border: `1px solid ${t.border}`, borderRadius: "40px", padding: "3px" }}>
-        {tabs.map((tab) => (
-          <button key={tab} onClick={() => onNavigate(tab.toLowerCase())} style={{ padding: isMobile ? "7px 12px" : "8px 22px", borderRadius: "36px", border: "none", cursor: "pointer", fontSize: isMobile ? "11px" : "12px", fontFamily: "'DM Sans', sans-serif", fontWeight: 500, letterSpacing: "0.3px", transition: "all 0.35s cubic-bezier(0.33, 1, 0.68, 1)", background: active === tab.toLowerCase() ? t.accent : "transparent", color: active === tab.toLowerCase() ? "#ffffff" : t.textMuted }}>
-            {tab}
-          </button>
-        ))}
+        {tabs.map((tab) => {
+          const isActive = active === tab.toLowerCase();
+          return (
+            <button
+              key={tab}
+              onClick={() => onNavigate(tab.toLowerCase())}
+              aria-current={isActive ? "page" : undefined}
+              style={{
+                padding: isMobile ? "8px 14px" : "9px 24px",
+                borderRadius: "36px",
+                border: "none",
+                cursor: "pointer",
+                fontSize: isMobile ? "12px" : "clamp(12px, 1vw, 15px)",
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 500,
+                letterSpacing: "0.3px",
+                transition: "all 0.35s cubic-bezier(0.33, 1, 0.68, 1)",
+                background: isActive ? t.accent : "transparent",
+                color: isActive ? "#ffffff" : t.navInactive,
+                minHeight: "44px",
+              }}
+            >
+              {tab}
+            </button>
+          );
+        })}
       </div>
       <div style={{ minWidth: isMobile ? "auto" : "180px", display: "flex", justifyContent: "flex-end" }}>
-        <button onClick={toggleTheme} style={{ width: isMobile ? "34px" : "40px", height: isMobile ? "34px" : "40px", borderRadius: "50%", border: `1px solid ${t.border}`, background: t.cardBg, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px", color: t.textMuted, transition: "all 0.3s ease" }} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
+        <button
+          onClick={toggleTheme}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          style={{
+            width: "44px", height: "44px",
+            borderRadius: "50%",
+            border: `1px solid ${t.border}`,
+            background: t.cardBg,
+            cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "16px",
+            color: t.navInactive,
+            transition: "all 0.3s ease"
+          }}
+        >
           {theme === "dark" ? "☀" : "☾"}
         </button>
       </div>
@@ -328,14 +404,14 @@ function TimelineMobile({ t }) {
           {[["3+", "Years"], ["10+", "Brands"], ["50M+", "Impressions"]].map(([val, label], i) => (
             <div key={label} style={{ flex: 1, padding: "14px 0", textAlign: "center", borderRight: i < 2 ? `1px solid ${t.border}` : "none" }}>
               <p style={{ fontFamily: "'Fraunces', serif", fontSize: "22px", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{val}</p>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>{label}</p>
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, margin: 0, letterSpacing: "0.5px" }}>{label}</p>
             </div>
           ))}
         </div>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: "16px 0 12px", lineHeight: 1.75 }}>
           I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side.
         </p>
-        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.5px", textDecoration: "none" }}>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "10px 18px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.5px", textDecoration: "none" }}>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           View Resume
         </a>
@@ -409,114 +485,157 @@ function TimelineSection({ t, isMobile }) {
   };
 
   if (isMobile) return <TimelineMobile t={t} />;
+
   const progress = ((activeIndex + 1) / TIMELINE_DATA.length) * 100;
   const activeItem = TIMELINE_DATA[activeIndex];
 
   return (
     <div style={{ height: "100vh", display: "flex", position: "relative", overflow: "hidden", justifyContent: "center" }}>
-      <div style={{ width: "100%", maxWidth: "1600px", display: "flex", position: "relative" }}>
-      <div style={{ width: "42%", justifyContent: "flex-end", flexShrink: 0, display: "flex", alignItems: "center", padding: "0 clamp(12px, 2vw, 36px) 0 clamp(20px, 3vw, 56px)", position: "relative", zIndex: 3, overflow: "hidden" }}>
-        <div style={{ display: "flex", gap: "clamp(10px, 1.2vw, 20px)", alignItems: "flex-start", width: "100%", minWidth: 0 }}>
-          <img src="/me.webp" alt="Basti De Luna" fetchPriority="high" style={{ width: "clamp(100px, 13vw, 210px)", height: "clamp(100px, 13vw, 210px)", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 3.5vw, 48px)", fontWeight: 600, color: t.text, margin: "0 0 8px", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
-              Basti De Luna
-            </h1>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(14px, 1.4vw, 18px)", color: t.accent, margin: "0 0 10px", fontWeight: 500, letterSpacing: "-0.2px" }}>
-              Marketing, Operations & Tech
-            </p>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px, 1.1vw, 14px)", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.6 }}>
-              Building brands from the ground up.
-            </p>
-            <div style={{ display: "flex", gap: "20px", marginBottom: "16px" }}>
-              <div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 52px)", fontWeight: 600, color: t.text, margin: 0 }}>3+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 16px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Years</p>
+      <div style={{ width: "100%", display: "flex", position: "relative" }}>
+
+        <div style={{
+          width: "42%",
+          flexShrink: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          padding: "0 clamp(16px, 2vw, 48px) 0 clamp(24px, 3.5vw, 80px)",
+          position: "relative",
+          zIndex: 3,
+        }}>
+          <div style={{ display: "flex", gap: "clamp(14px, 1.5vw, 28px)", alignItems: "flex-start", width: "100%" }}>
+            <img
+              src="/me.webp"
+              alt="Basti De Luna"
+              fetchPriority="high"
+              style={{
+                width: "clamp(120px, 14vw, 260px)",
+                height: "clamp(120px, 14vw, 260px)",
+                borderRadius: "clamp(14px, 1.2vw, 24px)",
+                objectFit: "cover",
+                flexShrink: 0,
+                border: `1px solid ${t.border}`,
+              }}
+            />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(36px, 3.5vw, 72px)", fontWeight: 600, color: t.text, margin: "0 0 clamp(6px, 0.6vw, 14px)", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
+                Basti De Luna
+              </h1>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(14px, 1.3vw, 22px)", color: t.accent, margin: "0 0 clamp(8px, 0.7vw, 16px)", fontWeight: 500, letterSpacing: "-0.2px" }}>
+                Marketing, Operations & Tech
+              </p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px, 1vw, 18px)", color: t.textMuted, margin: "0 0 clamp(12px, 1.1vw, 22px)", lineHeight: 1.6 }}>
+                Building brands from the ground up.
+              </p>
+              <div style={{ display: "flex", gap: "clamp(16px, 2vw, 40px)", marginBottom: "clamp(14px, 1.3vw, 28px)", alignItems: "flex-end" }}>
+                {[["3+", "Years"], ["10+", "Brands"], ["50M+", "Impressions"]].map(([val, label], i, arr) => (
+                  <div key={label} style={{ display: "flex", gap: "clamp(16px, 2vw, 40px)", alignItems: "flex-end" }}>
+                    <div>
+                      <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 2.8vw, 72px)", fontWeight: 600, color: t.text, margin: 0, lineHeight: 1 }}>{val}</p>
+                      <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.95vw, 18px)", color: t.textMuted, margin: "clamp(2px, 0.2vw, 6px) 0 0", letterSpacing: "0.5px" }}>{label}</p>
+                    </div>
+                    {i < arr.length - 1 && <div style={{ width: "1px", background: t.border, height: "clamp(36px, 3.5vw, 72px)", alignSelf: "flex-start" }} />}
+                  </div>
+                ))}
               </div>
-              <div style={{ width: "1px", background: t.border }} />
-              <div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 52px)", fontWeight: 600, color: t.text, margin: 0 }}>10+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 16px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Brands</p>
-              </div>
-              <div style={{ width: "1px", background: t.border }} />
-              <div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 52px)", fontWeight: 600, color: t.text, margin: 0 }}>50M+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 16px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Impressions</p>
-              </div>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px, 1vw, 18px)", color: t.textMuted, margin: "0 0 clamp(12px, 1.2vw, 24px)", lineHeight: 1.75 }}>
+                I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side.
+              </p>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "8px",
+                  padding: "clamp(8px, 0.7vw, 14px) clamp(14px, 1.2vw, 24px)",
+                  borderRadius: "8px",
+                  border: `1px solid ${t.accent}40`,
+                  background: t.accentGlow,
+                  color: t.accent,
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "clamp(11px, 0.9vw, 16px)",
+                  letterSpacing: "0.5px",
+                  textDecoration: "none",
+                  transition: "all 0.25s ease",
+                  minHeight: "44px",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = t.accentGlowStrong; e.currentTarget.style.borderColor = t.accent; }}
+                onMouseLeave={e => { e.currentTarget.style.background = t.accentGlow; e.currentTarget.style.borderColor = t.accent + "40"; }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                View Resume
+              </a>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(11px, 1vw, 18px)", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.75 }}>
-              I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side..
-            </p>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.5px", textDecoration: "none", transition: "all 0.25s ease" }}
-              onMouseEnter={e => { e.currentTarget.style.background = t.accentGlowStrong; e.currentTarget.style.borderColor = t.accent; }}
-              onMouseLeave={e => { e.currentTarget.style.background = t.accentGlow; e.currentTarget.style.borderColor = t.accent + "40"; }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              View Resume
-            </a>
           </div>
         </div>
-      </div>
-      <div style={{ width: "60px", flexShrink: 0, position: "relative", display: "flex", flexDirection: "column", alignItems: "center", padding: "100px 0 60px" }}>
-        <div style={{ position: "absolute", left: "50%", top: "100px", bottom: "60px", width: "1.5px", background: t.border, transform: "translateX(-50%)" }}>
-          <div style={{ width: "100%", height: `${progress}%`, background: `linear-gradient(to bottom, ${t.accent}, ${t.accentDim})`, transition: "height 0.6s cubic-bezier(0.33, 1, 0.68, 1)", borderRadius: "1px", boxShadow: `0 0 16px ${t.accentGlowStrong}` }} />
+
+        <div style={{ width: "clamp(50px, 4vw, 80px)", flexShrink: 0, position: "relative", display: "flex", flexDirection: "column", alignItems: "center", padding: "100px 0 60px" }}>
+          <div style={{ position: "absolute", left: "50%", top: "100px", bottom: "60px", width: "1.5px", background: t.border, transform: "translateX(-50%)" }}>
+            <div style={{ width: "100%", height: `${progress}%`, background: `linear-gradient(to bottom, ${t.accent}, ${t.accentDim})`, transition: "height 0.6s cubic-bezier(0.33, 1, 0.68, 1)", borderRadius: "1px", boxShadow: `0 0 16px ${t.accentGlowStrong}` }} />
+          </div>
+          <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center" }}>
+            {TIMELINE_DATA.map((item, i) => (
+              <button
+                key={i}
+                onClick={() => { setActiveIndex(i); scrollTo(i); }}
+                aria-label={`Go to ${item.title}`}
+                style={{ cursor: "pointer", padding: "8px", display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", minHeight: "44px", minWidth: "44px" }}
+              >
+                <div style={{ width: i === activeIndex ? "clamp(10px, 0.9vw, 16px)" : "clamp(6px, 0.55vw, 10px)", height: i === activeIndex ? "clamp(10px, 0.9vw, 16px)" : "clamp(6px, 0.55vw, 10px)", borderRadius: "50%", background: i <= activeIndex ? t.accent : t.textDim, transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", boxShadow: i === activeIndex ? `0 0 20px ${t.accentGlowStrong}, 0 0 40px ${t.accentGlow}` : "none", flexShrink: 0 }} />
+              </button>
+            ))}
+          </div>
         </div>
-        <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center" }}>
+
+        <div ref={containerRef} style={{ flex: 1, overflowY: "auto", scrollSnapType: "y mandatory", scrollbarWidth: "none", position: "relative" }}>
+          <div style={{ position: "fixed", top: 0, right: 0, width: "58%", height: "100vh", background: `radial-gradient(ellipse at 80% 50%, ${activeItem.glowColor}, transparent 60%)`, pointerEvents: "none", zIndex: 0, transition: "background 0.8s ease" }} />
+
           {TIMELINE_DATA.map((item, i) => (
-            <div key={i} onClick={() => { setActiveIndex(i); scrollTo(i); }} style={{ cursor: "pointer", padding: "4px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ width: i === activeIndex ? "12px" : "6px", height: i === activeIndex ? "12px" : "6px", borderRadius: "50%", background: i <= activeIndex ? t.accent : t.textDim, transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", boxShadow: i === activeIndex ? `0 0 20px ${t.accentGlowStrong}, 0 0 40px ${t.accentGlow}` : "none", flexShrink: 0 }} />
+            <div key={i} style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 clamp(28px, 4vw, 80px)", scrollSnapAlign: "start", position: "relative", zIndex: 1 }}>
+              <div style={{ opacity: i === activeIndex ? 1 : 0.12, transform: `translateY(${i === activeIndex ? 0 : 24}px)`, transition: "all 0.6s cubic-bezier(0.33, 1, 0.68, 1)", maxWidth: "900px" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 16px)", borderRadius: "4px", background: t.accentGlow, border: `1px solid ${t.accent}30`, color: t.accent, fontSize: "clamp(10px, 0.85vw, 14px)", fontFamily: "'DM Mono', monospace", fontWeight: 500, letterSpacing: "1.5px", marginBottom: "clamp(12px, 1.2vw, 24px)", lineHeight: 1 }}>
+                  {item.tag}
+                </div>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.95vw, 18px)", color: t.silver, margin: "0 0 clamp(10px, 1vw, 20px)" }}>{item.date}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "clamp(12px, 1.2vw, 24px)", marginBottom: "clamp(6px, 0.6vw, 12px)" }}>
+                  {item.logo && (
+                    <div style={{ width: "clamp(48px, 5vw, 96px)", height: "clamp(48px, 5vw, 96px)", borderRadius: "clamp(10px, 0.9vw, 18px)", overflow: "hidden", border: `1px solid ${t.border}`, flexShrink: 0 }}>
+                      <img src={item.logo} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                  )}
+                  {item.link ? (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 4vw, 80px)", fontWeight: 600, color: t.text, lineHeight: 1.05, letterSpacing: "-0.8px", textDecoration: "none", display: "inline-flex", alignItems: "baseline", gap: "10px" }}>
+                      {item.title}
+                      <svg width="clamp(16px, 1.6vw, 28px)" height="clamp(16px, 1.6vw, 28px)" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2" style={{ flexShrink: 0, position: "relative", top: "2px" }}>
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 4vw, 80px)", fontWeight: 600, color: t.text, lineHeight: 1.05, letterSpacing: "-0.8px", margin: 0 }}>
+                      {item.title}
+                    </h2>
+                  )}
+                </div>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(14px, 1.3vw, 24px)", color: t.accent, margin: "0 0 clamp(12px, 1.2vw, 24px)", fontWeight: 500 }}>{item.subtitle}</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.1vw, 20px)", color: t.textMuted, margin: 0, lineHeight: 1.8, maxWidth: "600px" }}>{item.desc}</p>
+                {item.products.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "clamp(4px, 0.5vw, 10px)", marginTop: "clamp(14px, 1.4vw, 28px)" }}>
+                    {item.products.map((p) => (
+                      <span key={p} style={{ padding: "clamp(4px, 0.4vw, 8px) clamp(10px, 0.9vw, 18px)", borderRadius: "6px", fontSize: "clamp(11px, 0.9vw, 16px)", fontFamily: "'DM Mono', monospace", background: t.cardBg, border: `1px solid ${t.border}`, color: t.textSecondary, letterSpacing: "0.3px" }}>{p}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
       </div>
-      <div ref={containerRef} style={{ flex: 1, overflowY: "auto", scrollSnapType: "y mandatory", scrollbarWidth: "none", position: "relative" }}>
-        <div style={{ position: "fixed", top: 0, right: 0, width: "calc(58% - 60px)", height: "100vh", background: `radial-gradient(ellipse at 80% 50%, ${activeItem.glowColor}, transparent 60%)`, pointerEvents: "none", zIndex: 0, transition: "background 0.8s ease" }} />
 
-        {TIMELINE_DATA.map((item, i) => (
-          <div key={i} style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 clamp(24px, 4vw, 60px)", scrollSnapAlign: "start", position: "relative", zIndex: 1 }}>
-
-            <div style={{ opacity: i === activeIndex ? 1 : 0.12, transform: `translateY(${i === activeIndex ? 0 : 24}px)`, transition: "all 0.6s cubic-bezier(0.33, 1, 0.68, 1)", maxWidth: "850px" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "5px 10px", borderRadius: "4px", background: t.accentGlow, border: `1px solid ${t.accent}30`, color: t.accent, fontSize: "10px", fontFamily: "'DM Mono', monospace", fontWeight: 500, letterSpacing: "1.5px", marginBottom: "16px", lineHeight: 1 }}>
-                {item.tag}
-              </div>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: t.silver, margin: "0 0 12px" }}>{item.date}</p>
-              <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "6px" }}>
-                {item.logo && (
-                  <div style={{ width: "clamp(40px, 4vw, 72px)", height: "clamp(40px, 4vw, 72px)", borderRadius: "12px", overflow: "hidden", border: `1px solid ${t.border}`, flexShrink: 0 }}>
-                    <img src={item.logo} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  </div>
-                )}
-                {item.link ? (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 64px)", fontWeight: 600, color: t.text, lineHeight: 1.1, letterSpacing: "-0.8px", textDecoration: "none", display: "inline-flex", alignItems: "baseline", gap: "8px" }}>
-                    {item.title}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2" style={{ flexShrink: 0, position: "relative", top: "2px" }}>
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </a>
-                ) : (
-                  <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 64px)", fontWeight: 600, color: t.text, lineHeight: 1.1, letterSpacing: "-0.8px" }}>
-                    {item.title}
-                  </h2>
-                )}
-              </div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.2vw, 20px)", color: t.accent, margin: "0 0 16px", fontWeight: 500 }}>{item.subtitle}</p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.1vw, 18px)", color: t.textMuted, margin: 0, lineHeight: 1.75, maxWidth: "560px" }}>{item.desc}</p>
-              {item.products.length > 0 && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "18px" }}>
-                  {item.products.map((p) => (
-                    <span key={p} style={{ padding: "5px 12px", borderRadius: "6px", fontSize: "11px", fontFamily: "'DM Mono', monospace", background: t.cardBg, border: `1px solid ${t.border}`, color: t.textSecondary, letterSpacing: "0.3px" }}>{p}</span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-      </div>
-      <div style={{ position: "absolute", bottom: "28px", left: "calc(42% + 60px + clamp(24px, 4vw, 60px))", display: "flex", alignItems: "center", gap: "8px", opacity: activeIndex === 0 ? 0.8 : 0.2, transition: "opacity 0.4s ease", animation: "pulseLeft 2s ease-in-out infinite", zIndex: 10 }}>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2">
+      <div style={{ position: "absolute", bottom: "28px", left: "calc(42% + clamp(50px, 4vw, 80px) + clamp(28px, 4vw, 80px))", display: "flex", alignItems: "center", gap: "8px", opacity: activeIndex === 0 ? 1 : 0.3, transition: "opacity 0.4s ease", animation: "pulseLeft 2s ease-in-out infinite", zIndex: 10 }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2">
           <path d="M12 5v14M5 12l7 7 7-7" />
         </svg>
-        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, letterSpacing: "0.5px" }}>Scroll to explore</span>
+        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.9vw, 16px)", color: t.textMuted, letterSpacing: "0.5px" }}>Scroll to explore</span>
       </div>
     </div>
   );
@@ -529,13 +648,13 @@ function ContactList({ t, hoveredContact, setHoveredContact }) {
         <a key={contact.platform} href={contact.link} target="_blank" rel="noopener noreferrer"
           onMouseEnter={() => setHoveredContact(i)}
           onMouseLeave={() => setHoveredContact(null)}
-          style={{ padding: "14px 18px", borderRadius: "10px", background: hoveredContact === i ? t.accentGlow : t.cardBg, border: `1px solid ${hoveredContact === i ? t.accent + "30" : t.border}`, display: "flex", alignItems: "center", gap: "14px", textDecoration: "none", transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(4px)" : "none" }}>
-          <span style={{ fontSize: "16px", width: "24px", textAlign: "center", color: hoveredContact === i ? t.accent : t.textDim }}>{contact.icon}</span>
+          style={{ padding: "clamp(12px, 1.1vw, 20px) clamp(14px, 1.3vw, 24px)", borderRadius: "10px", background: hoveredContact === i ? t.accentGlow : t.cardBg, border: `1px solid ${hoveredContact === i ? t.accent + "30" : t.border}`, display: "flex", alignItems: "center", gap: "clamp(10px, 1vw, 18px)", textDecoration: "none", transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(4px)" : "none", minHeight: "44px" }}>
+          <span style={{ fontSize: "clamp(14px, 1.2vw, 20px)", width: "clamp(20px, 1.8vw, 32px)", textAlign: "center", color: hoveredContact === i ? t.accent : t.silver }}>{contact.icon}</span>
           <div style={{ flex: 1 }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.text, margin: 0, fontWeight: 500 }}>{contact.platform}</p>
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, margin: 0 }}>{contact.value}</p>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1vw, 18px)", color: t.text, margin: 0, fontWeight: 500 }}>{contact.platform}</p>
+            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.85vw, 15px)", color: t.textMuted, margin: 0 }}>{contact.value}</p>
           </div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={hoveredContact === i ? t.accent : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(2px)" : "none" }}>
+          <svg width="clamp(14px, 1.1vw, 20px)" height="clamp(14px, 1.1vw, 20px)" viewBox="0 0 24 24" fill="none" stroke={hoveredContact === i ? t.accent : t.silver} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(2px)" : "none" }}>
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
@@ -564,7 +683,7 @@ function ContactSection({ t, isMobile, theme }) {
   }, []);
   const VISIBLE = 8;
 
-
+  const cardSize = "clamp(180px, 16vw, 280px)";
 
   if (isMobile) {
     return (
@@ -587,7 +706,7 @@ function ContactSection({ t, isMobile, theme }) {
                   {card.logo ? (
                     <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                   ) : (
-                    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: `linear-gradient(145deg, ${card.color}20, ${t.surface})` }}>
+                    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                       <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: card.color, opacity: 0.3, marginBottom: "8px" }} />
                       <p style={{ fontFamily: "'Fraunces', serif", fontSize: "12px", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 12px" }}>{card.title}</p>
                     </div>
@@ -595,7 +714,7 @@ function ContactSection({ t, isMobile, theme }) {
                 </div>
               );
               return card.link ? (
-                <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>{cardEl}</a>
+                <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" aria-label={card.title} style={{ textDecoration: "none" }}>{cardEl}</a>
               ) : (
                 <div key={i}>{cardEl}</div>
               );
@@ -605,7 +724,7 @@ function ContactSection({ t, isMobile, theme }) {
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "26px", fontWeight: 500, color: t.text, margin: "0 0 4px", letterSpacing: "-0.6px", textAlign: "center" }}>
           Brands I've worked with.
         </h2>
-        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, textAlign: "center", letterSpacing: "0.5px", marginBottom: "32px" }}>
+        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, textAlign: "center", letterSpacing: "0.5px", marginBottom: "32px" }}>
           Basti De Luna — Portfolio
         </p>
         <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "12px" }}>GET IN TOUCH</p>
@@ -616,15 +735,18 @@ function ContactSection({ t, isMobile, theme }) {
           Marketing & ops professional with 3+ years experience. Currently studying CS and open to new opportunities.
         </p>
         <ContactList t={t} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
-
       </div>
     );
   }
 
+  const stackCardW = "clamp(180px, 16vw, 280px)";
+  const stackCardH = "clamp(180px, 16vw, 280px)";
+  const stackContainerH = `calc(${stackCardH} + clamp(180px, 16vw, 280px))`;
+
   return (
     <div style={{ height: "100vh", display: "flex", position: "relative" }}>
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 48px", overflow: "hidden", position: "relative" }}>
-        <div style={{ position: "relative", width: "220px", height: "460px" }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 48px", overflow: "hidden" }}>
+        <div style={{ position: "relative", width: stackCardW, height: stackContainerH }}>
           {Array.from({ length: VISIBLE }).map((_, i) => {
             const stackPos = VISIBLE - 1 - i;
             const cardFloat = (offset + stackPos) % PORTFOLIO_CARDS.length;
@@ -632,42 +754,43 @@ function ContactSection({ t, isMobile, theme }) {
             const card = PORTFOLIO_CARDS[cardIdx < 0 ? cardIdx + PORTFOLIO_CARDS.length : cardIdx];
             const frac = offset % 1;
             const pos = stackPos + (1 - frac);
-            const yShift = pos * 28;
+            const yShift = pos * 32;
             const scale = 1.08 - pos * 0.05;
             const blur = Math.max(0, (pos - 1) * 3);
             const cardOpacity = pos > VISIBLE - 1.5 ? Math.max(0, (VISIBLE - pos) * 2) : pos < 0.3 ? Math.max(0, pos * 3.3) : 1;
             const cardEl = (
-              <div style={{ position: "absolute", top: "50%", left: "50%", width: "200px", height: "200px", borderRadius: "20px", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: VISIBLE - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
+              <div style={{ position: "absolute", top: "50%", left: "50%", width: stackCardW, height: stackCardH, borderRadius: "clamp(16px, 1.4vw, 28px)", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: VISIBLE - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
                 {card.logo ? (
                   <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 ) : (
-                  <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: `linear-gradient(145deg, ${card.color}20, ${t.surface})` }}>
-                    <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: card.color, opacity: 0.3, marginBottom: "10px" }} />
-                    <p style={{ fontFamily: "'Fraunces', serif", fontSize: "14px", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 16px" }}>{card.title}</p>
+                  <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "clamp(32px, 3vw, 56px)", height: "clamp(32px, 3vw, 56px)", borderRadius: "clamp(8px, 0.8vw, 14px)", background: card.color, opacity: 0.3, marginBottom: "clamp(8px, 0.8vw, 14px)" }} />
+                    <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(13px, 1.1vw, 20px)", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 16px" }}>{card.title}</p>
                   </div>
                 )}
               </div>
             );
             return card.link ? (
-              <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>{cardEl}</a>
+              <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" aria-label={card.title} style={{ textDecoration: "none" }}>{cardEl}</a>
             ) : (
               <div key={i}>{cardEl}</div>
             );
           })}
         </div>
-        <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 500, color: t.text, margin: "24px 0 8px", letterSpacing: "-0.8px", textAlign: "center" }}>
+        <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3vw, 52px)", fontWeight: 500, color: t.text, margin: "clamp(20px, 2vw, 40px) 0 clamp(6px, 0.6vw, 12px)", letterSpacing: "-0.8px", textAlign: "center" }}>
           Brands I've worked with.
         </h2>
-        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textDim, textAlign: "center", letterSpacing: "0.5px" }}>
+        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.9vw, 16px)", color: t.textMuted, textAlign: "center", letterSpacing: "0.5px" }}>
           Basti De Luna — Portfolio
         </p>
       </div>
-      <div style={{ width: "360px", flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 32px", borderLeft: `1px solid ${t.border}` }}>
-        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "20px" }}>GET IN TOUCH</p>
-        <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "34px", fontWeight: 500, color: t.text, margin: "0 0 10px", lineHeight: 1.15, letterSpacing: "-0.5px" }}>
+
+      <div style={{ width: "clamp(300px, 28vw, 480px)", flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px clamp(24px, 2.5vw, 48px)", borderLeft: `1px solid ${t.border}` }}>
+        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 14px)", color: t.textDim, letterSpacing: "2px", marginBottom: "clamp(16px, 1.5vw, 28px)" }}>GET IN TOUCH</p>
+        <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(30px, 3vw, 56px)", fontWeight: 500, color: t.text, margin: "0 0 clamp(8px, 0.8vw, 16px)", lineHeight: 1.15, letterSpacing: "-0.5px" }}>
           Let's work<br />together.
         </h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, lineHeight: 1.7, margin: "0 0 36px" }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.05vw, 18px)", color: t.textMuted, lineHeight: 1.7, margin: "0 0 clamp(24px, 2.5vw, 48px)" }}>
           Marketing & ops professional with 3+ years experience. Currently studying CS and open to new opportunities.
         </p>
         <ContactList t={t} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
@@ -679,41 +802,41 @@ function ContactSection({ t, isMobile, theme }) {
 function ProjectsSection({ t, isMobile }) {
   const [hovered, setHovered] = useState(null);
   return (
-    <div style={{ minHeight: "100vh", padding: isMobile ? "80px 16px 100px" : "120px clamp(32px, 5vw, 60px) 80px", position: "relative" }}>
+    <div style={{ minHeight: "100vh", padding: isMobile ? "80px 16px 100px" : "clamp(80px, 8vw, 140px) clamp(32px, 5vw, 80px)", position: "relative" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${t.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${t.gridColor} 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)" }} />
-      <div style={{ maxWidth: "1060px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <div style={{ marginBottom: isMobile ? "32px" : "56px" }}>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "14px" }}>SELECTED WORK</p>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(34px, 4.5vw, 52px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <div style={{ marginBottom: isMobile ? "32px" : "clamp(36px, 4vw, 72px)" }}>
+          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 14px)", color: t.textDim, letterSpacing: "2px", marginBottom: "clamp(10px, 1vw, 20px)" }}>SELECTED WORK</p>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 72px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
             <span style={{ color: t.textDim, fontStyle: "italic" }}>A few</span> more things.
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(300px, 1fr))", gap: "14px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(clamp(280px, 22vw, 400px), 1fr))", gap: "clamp(10px, 1vw, 20px)" }}>
           {PROJECTS.map((project, i) => {
             const card = (
-              <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ borderRadius: "14px", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}>
+              <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ borderRadius: "clamp(12px, 1vw, 20px)", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}>
                 {project.banner && (
                   <div style={{ width: "100%", aspectRatio: "3/1", overflow: "hidden", flexShrink: 0 }}>
                     <img src={project.banner} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease", transform: hovered === i ? "scale(1.05)" : "scale(1)" }} />
                   </div>
                 )}
-                <div style={{ padding: "24px 26px 28px", display: "flex", flexDirection: "column", flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "20px", fontWeight: 500, color: t.text, margin: 0, flex: 1 }}>{project.name}</h3>
+                <div style={{ padding: "clamp(18px, 1.8vw, 36px) clamp(20px, 2vw, 40px) clamp(22px, 2.2vw, 44px)", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "clamp(4px, 0.4vw, 8px)" }}>
+                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(18px, 1.6vw, 28px)", fontWeight: 500, color: t.text, margin: 0, flex: 1 }}>{project.name}</h3>
                     {project.link && (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hovered === i ? project.color : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hovered === i ? "translate(2px, -2px)" : "none", flexShrink: 0 }}>
+                      <svg width="clamp(14px, 1.2vw, 22px)" height="clamp(14px, 1.2vw, 22px)" viewBox="0 0 24 24" fill="none" stroke={hovered === i ? project.color : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hovered === i ? "translate(2px, -2px)" : "none", flexShrink: 0 }}>
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
                     )}
                   </div>
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, margin: "0 0 12px", letterSpacing: "0.3px", opacity: 0.8 }}>{project.position}</p>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, lineHeight: 1.65, margin: "0 0 16px" }}>{project.desc}</p>
+                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 14px)", color: project.color, margin: "0 0 clamp(10px, 0.9vw, 18px)", letterSpacing: "0.3px", opacity: 0.9 }}>{project.position}</p>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px, 1vw, 17px)", color: t.textMuted, lineHeight: 1.65, margin: "0 0 clamp(12px, 1.1vw, 20px)" }}>{project.desc}</p>
                   {project.stats.length > 0 && (
-                    <div style={{ marginTop: "auto", borderTop: `1px solid ${t.border}`, paddingTop: "14px", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, 4)}, 1fr)`, gap: "8px" }}>
+                    <div style={{ marginTop: "auto", borderTop: `1px solid ${t.border}`, paddingTop: "clamp(10px, 1vw, 20px)", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, 4)}, 1fr)`, gap: "8px" }}>
                       {project.stats.map((stat) => (
                         <div key={stat.label}>
-                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "16px", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{stat.value}</p>
-                          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: t.textDim, margin: 0, letterSpacing: "0.3px" }}>{stat.label}</p>
+                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(16px, 1.4vw, 24px)", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{stat.value}</p>
+                          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(9px, 0.78vw, 13px)", color: t.textDim, margin: 0, letterSpacing: "0.3px" }}>{stat.label}</p>
                         </div>
                       ))}
                     </div>
@@ -752,11 +875,13 @@ export default function Portfolio() {
         {!isMobile && <MouseBlob t={t} />}
         <Nav active={activeSection} onNavigate={setActiveSection} theme={theme} toggleTheme={toggleTheme} t={t} isMobile={isMobile} />
         <SocialBar t={t} theme={theme} isMobile={isMobile} />
-        <div key={`${activeSection}-${theme}`} style={{ animation: "fadeSection 0.45s cubic-bezier(0.33, 1, 0.68, 1)", position: "relative", zIndex: 2 }}>
-          {activeSection === "timeline" && <TimelineSection t={t} isMobile={isMobile} />}
-          {activeSection === "projects" && <ProjectsSection t={t} isMobile={isMobile} />}
-          {activeSection === "contact" && <ContactSection t={t} isMobile={isMobile} theme={theme} />}
-        </div>
+        <main>
+          <div key={`${activeSection}-${theme}`} style={{ animation: "fadeSection 0.45s cubic-bezier(0.33, 1, 0.68, 1)", position: "relative", zIndex: 2 }}>
+            {activeSection === "timeline" && <TimelineSection t={t} isMobile={isMobile} />}
+            {activeSection === "projects" && <ProjectsSection t={t} isMobile={isMobile} />}
+            {activeSection === "contact" && <ContactSection t={t} isMobile={isMobile} theme={theme} />}
+          </div>
+        </main>
       </div>
     </>
   );

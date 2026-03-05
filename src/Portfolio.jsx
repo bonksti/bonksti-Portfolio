@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+
 const THEMES = {
   dark: {
     bg: "#050505",
@@ -37,6 +38,7 @@ const THEMES = {
     gridColor: "rgba(0,0,0,0.04)",
   },
 };
+
 const TIMELINE_DATA = [
   {
     date: "Dec 2025 – Feb 2026",
@@ -94,6 +96,7 @@ const TIMELINE_DATA = [
     logo: "/logos/southernlabs.jpg",
   },
 ];
+
 const PROJECTS = [
   {
     name: "RewardsHQ",
@@ -191,6 +194,7 @@ const PROJECTS = [
     link: null,
   },
 ];
+
 const CONTACTS = [
   { platform: "Twitter / X", value: "@bonksti", icon: "𝕏", link: "https://x.com/bonksti" },
   { platform: "LinkedIn", value: "Basti De Luna", icon: "in", link: "https://www.linkedin.com/in/bonksti/" },
@@ -198,6 +202,7 @@ const CONTACTS = [
   { platform: "Telegram", value: "@bonksti", icon: "✈", link: "https://t.me/bonksti" },
   { platform: "Instagram", value: "@bonksti", icon: "◎", link: "https://instagram.com/bonksti" },
 ];
+
 const SOCIALS = [
   { icon: "/icons/twitter.png", link: "https://x.com/bonksti", title: "Twitter / X" },
   { icon: "/icons/linkedin.png", link: "https://www.linkedin.com/in/bonksti/", title: "LinkedIn" },
@@ -206,6 +211,7 @@ const SOCIALS = [
   { icon: "/icons/github.png", link: "https://github.com/bonksti", title: "GitHub" },
   { icon: "/icons/mail.png", link: "mailto:bastidluna@gmail.com", title: "Mail" },
 ];
+
 const PORTFOLIO_CARDS = [
   { title: "Surgence Labs", sub: "Marketing Agency", color: "#3b82f6", link: "https://x.com/surgence_io", logo: "/logos/surgence.jpg" },
   { title: "Shards", sub: "Marketing & Ops", color: "#f59e0b", link: "https://x.com/shardsofficial", logo: "/logos/shards.jpg" },
@@ -219,22 +225,12 @@ const PORTFOLIO_CARDS = [
   { title: "Dininho Adventures", sub: "Web3 Game", color: "#8b5cf6", link: "https://x.com/DininhoNFT", logo: "/logos/dininho.jpg" },
   { title: "South Locker", sub: "Clothing Brand", color: "#f97316", link: "https://www.instagram.com/southlocker", logo: "/logos/southlocker.jpg" },
 ];
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-  return isMobile;
-}
+
 function MouseBlob({ t }) {
   const blobRef = useRef(null);
   const pos = useRef({ x: 0, y: 0 });
   const target = useRef({ x: 0, y: 0 });
   const raf = useRef(null);
-  const isMobile = useIsMobile();
   const animate = useCallback(() => {
     pos.current.x += (target.current.x - pos.current.x) * 0.08;
     pos.current.y += (target.current.y - pos.current.y) * 0.08;
@@ -244,37 +240,25 @@ function MouseBlob({ t }) {
     raf.current = requestAnimationFrame(animate);
   }, []);
   useEffect(() => {
-    if (isMobile) return;
     const handleMove = (e) => { target.current = { x: e.clientX, y: e.clientY }; };
     window.addEventListener("mousemove", handleMove);
     raf.current = requestAnimationFrame(animate);
     return () => { window.removeEventListener("mousemove", handleMove); cancelAnimationFrame(raf.current); };
-  }, [animate, isMobile]);
-  if (isMobile) return null;
+  }, [animate]);
   return (
     <div ref={blobRef} style={{ position: "fixed", top: 0, left: 0, width: "600px", height: "600px", borderRadius: "50%", background: `radial-gradient(circle, ${t.blobColor}, transparent 65%)`, pointerEvents: "none", zIndex: 1, transition: "background 0.4s ease", willChange: "transform" }} />
   );
 }
-function SocialBar({ t, theme, isMobile }) {
-  const [hovered, setHovered] = useState(null);
 
-  if (isMobile) {
-    return (
-      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-        {SOCIALS.map((s, i) => (
-          <a key={s.title} href={s.link} target="_blank" rel="noopener noreferrer" title={s.title} style={{ width: "40px", height: "40px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", background: t.cardBg, border: `1px solid ${t.border}` }}>
-            <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: 0.6, filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
-          </a>
-        ))}
-      </div>
-    );
-  }
+function SocialBar({ t, theme }) {
+  const [hovered, setHovered] = useState(null);
   return (
     <div style={{ position: "fixed", bottom: "28px", left: "32px", display: "flex", flexDirection: "column", gap: "6px", zIndex: 50 }}>
       <div style={{ display: "flex", gap: "8px" }}>
         {SOCIALS.map((s, i) => (
           <a key={s.title} href={s.link} target="_blank" rel="noopener noreferrer" title={s.title} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ width: "40px", height: "40px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", background: hovered === i ? t.accentGlow : t.cardBg, border: `1px solid ${hovered === i ? t.accent + "40" : t.border}`, transition: "all 0.25s ease", transform: hovered === i ? "translateY(-3px)" : "none" }}>
-            <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: hovered === i ? 1 : 0.5, transition: "opacity 0.25s ease", filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
+            <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: hovered === i ? 1 : 0.5, transition: "opacity 0.25s ease", filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)"
+ }} />
           </a>
         ))}
       </div>
@@ -284,110 +268,31 @@ function SocialBar({ t, theme, isMobile }) {
     </div>
   );
 }
-function Nav({ active, onNavigate, theme, toggleTheme, t, isMobile }) {
+
+function Nav({ active, onNavigate, theme, toggleTheme, t }) {
   const tabs = ["Timeline", "Projects", "Contact"];
   return (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: isMobile ? "center" : "space-between", padding: isMobile ? "12px 16px" : "16px 32px", background: `linear-gradient(to bottom, ${t.gradientTop} 50%, transparent)`, backdropFilter: "blur(12px)" }}>
-      {!isMobile && (
-        <div style={{ fontFamily: "'Fraunces', serif", fontSize: "18px", fontWeight: 500, color: t.text, letterSpacing: "-0.3px", minWidth: "180px" }}>
-          Basti De Luna
-        </div>
-      )}
+    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 32px", background: `linear-gradient(to bottom, ${t.gradientTop} 50%, transparent)`, backdropFilter: "blur(12px)" }}>
+      <div style={{ fontFamily: "'Fraunces', serif", fontSize: "18px", fontWeight: 500, color: t.text, letterSpacing: "-0.3px", minWidth: "180px" }}>
+        Basti De Luna
+      </div>
       <div style={{ display: "flex", gap: "2px", background: t.cardBg, border: `1px solid ${t.border}`, borderRadius: "40px", padding: "3px" }}>
         {tabs.map((tab) => (
-          <button key={tab} onClick={() => onNavigate(tab.toLowerCase())} style={{ padding: isMobile ? "8px 14px" : "8px 22px", borderRadius: "36px", border: "none", cursor: "pointer", fontSize: isMobile ? "11px" : "12px", fontFamily: "'DM Sans', sans-serif", fontWeight: 500, letterSpacing: "0.3px", transition: "all 0.35s cubic-bezier(0.33, 1, 0.68, 1)", background: active === tab.toLowerCase() ? t.accent : "transparent", color: active === tab.toLowerCase() ? "#ffffff" : t.textMuted }}>
+          <button key={tab} onClick={() => onNavigate(tab.toLowerCase())} style={{ padding: "8px 22px", borderRadius: "36px", border: "none", cursor: "pointer", fontSize: "12px", fontFamily: "'DM Sans', sans-serif", fontWeight: 500, letterSpacing: "0.3px", transition: "all 0.35s cubic-bezier(0.33, 1, 0.68, 1)", background: active === tab.toLowerCase() ? t.accent : "transparent", color: active === tab.toLowerCase() ? "#ffffff" : t.textMuted }}>
             {tab}
           </button>
         ))}
       </div>
-      {!isMobile && (
-        <div style={{ minWidth: "180px", display: "flex", justifyContent: "flex-end" }}>
-          <button onClick={toggleTheme} style={{ width: "40px", height: "40px", borderRadius: "50%", border: `1px solid ${t.border}`, background: t.cardBg, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px", color: t.textMuted, transition: "all 0.3s ease" }} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
-            {theme === "dark" ? "☀" : "☾"}
-          </button>
-        </div>
-      )}
-      {isMobile && (
-        <button onClick={toggleTheme} style={{ position: "absolute", right: "16px", width: "36px", height: "36px", borderRadius: "50%", border: `1px solid ${t.border}`, background: t.cardBg, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", color: t.textMuted }}>
+      <div style={{ minWidth: "180px", display: "flex", justifyContent: "flex-end" }}>
+        <button onClick={toggleTheme} style={{ width: "40px", height: "40px", borderRadius: "50%", border: `1px solid ${t.border}`, background: t.cardBg, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px", color: t.textMuted, transition: "all 0.3s ease" }} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
           {theme === "dark" ? "☀" : "☾"}
         </button>
-      )}
+      </div>
     </nav>
   );
 }
 
-function MobileTimelineSection({ t, theme }) {
-  return (
-    <div style={{ padding: "72px 20px 100px" }}>
-      {/* Hero card */}
-      <div style={{ background: t.cardBg, border: `1px solid ${t.border}`, borderRadius: "20px", padding: "24px", marginBottom: "32px" }}>
-        <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", marginBottom: "20px" }}>
-          <img src="/me.png" alt="Basti De Luna" style={{ width: "72px", height: "72px", borderRadius: "12px", objectFit: "cover", border: `1px solid ${t.border}`, flexShrink: 0 }} />
-          <div>
-            <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "24px", fontWeight: 600, color: t.text, margin: "0 0 4px", letterSpacing: "-0.6px" }}>Basti De Luna</h1>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.accent, margin: "0 0 4px", fontWeight: 500 }}>Marketing, Operations & Tech</p>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: t.textMuted, margin: 0 }}>Building brands from the ground up.</p>
-          </div>
-        </div>
-        <div style={{ display: "flex", gap: "0", borderRadius: "12px", overflow: "hidden", border: `1px solid ${t.border}`, marginBottom: "20px" }}>
-          {[["3+", "Years"], ["10+", "Brands"], ["50M+", "Impressions"]].map(([val, label], i) => (
-            <div key={label} style={{ flex: 1, padding: "14px 8px", textAlign: "center", borderRight: i < 2 ? `1px solid ${t.border}` : "none", background: t.surface }}>
-              <p style={{ fontFamily: "'Fraunces', serif", fontSize: "22px", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{val}</p>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>{label}</p>
-            </div>
-          ))}
-        </div>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: "0 0 20px", lineHeight: 1.7 }}>
-          I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols.
-        </p>
-        <SocialBar t={t} theme={theme} isMobile={true} />
-      </div>
-      {/* Timeline entries */}
-      <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "16px" }}>EXPERIENCE</p>
-      <div style={{ position: "relative" }}>
-        {/* Vertical line */}
-        <div style={{ position: "absolute", left: "7px", top: "8px", bottom: "8px", width: "1.5px", background: t.border }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-          {TIMELINE_DATA.map((item, i) => (
-            <div key={i} style={{ display: "flex", gap: "20px", paddingBottom: i < TIMELINE_DATA.length - 1 ? "28px" : "0" }}>
-              {/* Dot */}
-              <div style={{ flexShrink: 0, width: "16px", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "6px" }}>
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: t.accent, boxShadow: `0 0 12px ${t.accentGlowStrong}`, flexShrink: 0, zIndex: 1 }} />
-              </div>
-              {/* Content */}
-              <div style={{ flex: 1, background: t.cardBg, border: `1px solid ${t.border}`, borderRadius: "14px", padding: "18px", overflow: "hidden", position: "relative" }}>
-                <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 100% 0%, ${item.glowColor}, transparent 60%)`, pointerEvents: "none" }} />
-                <div style={{ display: "inline-flex", padding: "4px 8px", borderRadius: "4px", background: t.accentGlow, border: `1px solid ${t.accent}30`, color: t.accent, fontSize: "9px", fontFamily: "'DM Mono', monospace", letterSpacing: "1.2px", marginBottom: "10px" }}>
-                  {item.tag}
-                </div>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.silver, margin: "0 0 6px" }}>{item.date}</p>
-                {item.link ? (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fraunces', serif", fontSize: "20px", fontWeight: 600, color: t.text, margin: "0 0 4px", letterSpacing: "-0.4px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                    {item.title}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                  </a>
-                ) : (
-                  <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "20px", fontWeight: 600, color: t.text, margin: "0 0 4px", letterSpacing: "-0.4px" }}>{item.title}</h2>
-                )}
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.accent, margin: "0 0 10px", fontWeight: 500 }}>{item.subtitle}</p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: t.textMuted, margin: 0, lineHeight: 1.7 }}>{item.desc}</p>
-                {item.products.length > 0 && (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginTop: "12px" }}>
-                    {item.products.map((p) => (
-                      <span key={p} style={{ padding: "4px 10px", borderRadius: "5px", fontSize: "10px", fontFamily: "'DM Mono', monospace", background: t.cardBg, border: `1px solid ${t.border}`, color: t.textSecondary }}>{p}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function DesktopTimelineSection({ t }) {
+function TimelineSection({ t }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef(null);
   useEffect(() => {
@@ -414,9 +319,15 @@ function DesktopTimelineSection({ t }) {
         <div style={{ display: "flex", gap: "24px", alignItems: "flex-start" }}>
           <img src="/me.png" alt="Basti De Luna" style={{ width: "400px", height: "400px", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div style={{ flex: 1, minWidth: 0 }}>
-            <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 3.5vw, 48px)", fontWeight: 600, color: t.text, margin: "0 0 8px", lineHeight: 1.05, letterSpacing: "-1.2px" }}>Basti De Luna</h1>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "18px", color: t.accent, margin: "0 0 10px", fontWeight: 500, letterSpacing: "-0.2px" }}>Marketing, Operations & Tech</p>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.6 }}>Building brands from the ground up.</p>
+            <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 3.5vw, 48px)", fontWeight: 600, color: t.text, margin: "0 0 8px", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
+              Basti De Luna
+            </h1>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "18px", color: t.accent, margin: "0 0 10px", fontWeight: 500, letterSpacing: "-0.2px" }}>
+              Marketing, Operations & Tech
+            </p>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.6 }}>
+              Building brands from the ground up.
+            </p>
             <div style={{ display: "flex", gap: "20px", marginBottom: "16px" }}>
               <div>
                 <p style={{ fontFamily: "'Fraunces', serif", fontSize: "32px", fontWeight: 600, color: t.text, margin: 0 }}>3+</p>
@@ -473,7 +384,9 @@ function DesktopTimelineSection({ t }) {
                   </svg>
                 </a>
               ) : (
-                <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 600, color: t.text, margin: "0 0 6px", lineHeight: 1.1, letterSpacing: "-0.8px" }}>{item.title}</h2>
+                <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 600, color: t.text, margin: "0 0 6px", lineHeight: 1.1, letterSpacing: "-0.8px" }}>
+                  {item.title}
+                </h2>
               )}
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: t.accent, margin: "0 0 16px", fontWeight: 500 }}>{item.subtitle}</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, margin: 0, lineHeight: 1.75, maxWidth: "440px" }}>{item.desc}</p>
@@ -489,18 +402,16 @@ function DesktopTimelineSection({ t }) {
         ))}
       </div>
       <div style={{ position: "absolute", bottom: "28px", left: "calc(42% + 60px + clamp(24px, 4vw, 60px))", display: "flex", alignItems: "center", gap: "8px", opacity: activeIndex === 0 ? 0.8 : 0.2, transition: "opacity 0.4s ease", animation: "pulseLeft 2s ease-in-out infinite", zIndex: 10 }}>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2">
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
         <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, letterSpacing: "0.5px" }}>Scroll to explore</span>
       </div>
     </div>
   );
 }
-function TimelineSection({ t, theme, isMobile }) {
-  if (isMobile) return <MobileTimelineSection t={t} theme={theme} />;
-  return <DesktopTimelineSection t={t} />;
-}
 
-function ContactSection({ t, isMobile }) {
+function ContactSection({ t }) {
   const [hoveredContact, setHoveredContact] = useState(null);
   const [offset, setOffset] = useState(0);
   const rafRef = useRef(null);
@@ -519,73 +430,40 @@ function ContactSection({ t, isMobile }) {
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
   const VISIBLE = 8;
-  const CardStack = () => (
-    <div style={{ position: "relative", width: "200px", height: isMobile ? "360px" : "460px", margin: "0 auto" }}>
-      {Array.from({ length: VISIBLE }).map((_, i) => {
-        const stackPos = VISIBLE - 1 - i;
-        const cardFloat = (offset + stackPos) % PORTFOLIO_CARDS.length;
-        const cardIdx = Math.floor(cardFloat) % PORTFOLIO_CARDS.length;
-        const card = PORTFOLIO_CARDS[cardIdx < 0 ? cardIdx + PORTFOLIO_CARDS.length : cardIdx];
-        const frac = offset % 1;
-        const pos = stackPos + (1 - frac);
-        const yShift = pos * (isMobile ? 22 : 28);
-        const scale = 1.08 - pos * 0.05;
-        const blur = Math.max(0, (pos - 1) * 3);
-        const cardOpacity = pos > VISIBLE - 1.5 ? Math.max(0, (VISIBLE - pos) * 2) : pos < 0.3 ? Math.max(0, pos * 3.3) : 1;
-        const cardEl = (
-          <div style={{ position: "absolute", top: "50%", left: "50%", width: isMobile ? "160px" : "200px", height: isMobile ? "160px" : "200px", borderRadius: "20px", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: VISIBLE - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
-            {card.logo ? (
-              <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            ) : (
-              <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: `linear-gradient(145deg, ${card.color}20, ${t.surface})` }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: card.color, opacity: 0.3, marginBottom: "10px" }} />
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "14px", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 16px" }}>{card.title}</p>
-              </div>
-            )}
-          </div>
-        );
-        return card.link ? (
-          <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>{cardEl}</a>
-        ) : (
-          <div key={i}>{cardEl}</div>
-        );
-      })}
-    </div>
-  );
-  if (isMobile) {
-    return (
-      <div style={{ padding: "72px 20px 100px" }}>
-        <CardStack />
-        <div style={{ textAlign: "center", margin: "20px 0 32px" }}>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "28px", fontWeight: 500, color: t.text, margin: "0 0 6px", letterSpacing: "-0.6px" }}>Brands I've worked with.</h2>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "0.5px" }}>Basti De Luna — Portfolio</p>
-        </div>
-        <div style={{ borderTop: `1px solid ${t.border}`, paddingTop: "32px" }}>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "16px" }}>GET IN TOUCH</p>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "30px", fontWeight: 500, color: t.text, margin: "0 0 10px", lineHeight: 1.15, letterSpacing: "-0.5px" }}>Let's work together.</h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, lineHeight: 1.7, margin: "0 0 24px" }}>
-            Marketing & ops professional with 3+ years experience. Currently studying CS and open to new opportunities.
-          </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            {CONTACTS.map((c, i) => (
-              <a key={c.platform} href={c.link} target="_blank" rel="noopener noreferrer" style={{ padding: "14px 16px", borderRadius: "10px", background: t.cardBg, border: `1px solid ${t.border}`, display: "flex", alignItems: "center", gap: "14px", textDecoration: "none" }}>
-                <span style={{ fontSize: "15px", width: "24px", textAlign: "center", color: t.textDim }}>{c.icon}</span>
-                <div style={{ flex: 1 }}>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.text, margin: 0, fontWeight: 500 }}>{c.platform}</p>
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, margin: 0 }}>{c.value}</p>
-                </div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.textDim} strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
   return (
     <div style={{ height: "100vh", display: "flex", position: "relative" }}>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 48px", overflow: "hidden", position: "relative" }}>
-        <CardStack />
+        <div style={{ position: "relative", width: "220px", height: "460px" }}>
+          {Array.from({ length: VISIBLE }).map((_, i) => {
+            const stackPos = VISIBLE - 1 - i;
+            const cardFloat = (offset + stackPos) % PORTFOLIO_CARDS.length;
+            const cardIdx = Math.floor(cardFloat) % PORTFOLIO_CARDS.length;
+            const card = PORTFOLIO_CARDS[cardIdx < 0 ? cardIdx + PORTFOLIO_CARDS.length : cardIdx];
+            const frac = offset % 1;
+            const pos = stackPos + (1 - frac);
+            const yShift = pos * 28;
+            const scale = 1.08 - pos * 0.05;
+            const blur = Math.max(0, (pos - 1) * 3);
+            const cardOpacity = pos > VISIBLE - 1.5 ? Math.max(0, (VISIBLE - pos) * 2) : pos < 0.3 ? Math.max(0, pos * 3.3) : 1;
+            const cardEl = (
+              <div style={{ position: "absolute", top: "50%", left: "50%", width: "200px", height: "200px", borderRadius: "20px", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: VISIBLE - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
+                {card.logo ? (
+                  <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                ) : (
+                  <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: `linear-gradient(145deg, ${card.color}20, ${t.surface})` }}>
+                    <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: card.color, opacity: 0.3, marginBottom: "10px" }} />
+                    <p style={{ fontFamily: "'Fraunces', serif", fontSize: "14px", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 16px" }}>{card.title}</p>
+                  </div>
+                )}
+              </div>
+            );
+            return card.link ? (
+              <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>{cardEl}</a>
+            ) : (
+              <div key={i}>{cardEl}</div>
+            );
+          })}
+        </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 500, color: t.text, margin: "24px 0 8px", letterSpacing: "-0.8px", textAlign: "center" }}>
           Brands I've worked with.
         </h2>
@@ -620,19 +498,19 @@ function ContactSection({ t, isMobile }) {
   );
 }
 
-function ProjectsSection({ t, isMobile }) {
+function ProjectsSection({ t }) {
   const [hovered, setHovered] = useState(null);
   return (
-    <div style={{ minHeight: "100vh", padding: isMobile ? "72px 16px 100px" : "120px clamp(32px, 5vw, 60px) 80px", position: "relative" }}>
+    <div style={{ minHeight: "100vh", padding: "120px clamp(32px, 5vw, 60px) 80px", position: "relative" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${t.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${t.gridColor} 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)" }} />
       <div style={{ maxWidth: "1060px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <div style={{ marginBottom: isMobile ? "32px" : "56px" }}>
+        <div style={{ marginBottom: "56px" }}>
           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "14px" }}>SELECTED WORK</p>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(34px, 4.5vw, 52px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(34px, 4.5vw, 52px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
             <span style={{ color: t.textDim, fontStyle: "italic" }}>A few</span> more things.
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(300px, 1fr))", gap: "12px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "14px" }}>
           {PROJECTS.map((project, i) => {
             const card = (
               <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ borderRadius: "14px", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}>
@@ -641,22 +519,22 @@ function ProjectsSection({ t, isMobile }) {
                     <img src={project.banner} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease", transform: hovered === i ? "scale(1.05)" : "scale(1)" }} />
                   </div>
                 )}
-                <div style={{ padding: "20px 22px 24px", display: "flex", flexDirection: "column", flex: 1 }}>
+                <div style={{ padding: "24px 26px 28px", display: "flex", flexDirection: "column", flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "18px", fontWeight: 500, color: t.text, margin: 0, flex: 1 }}>{project.name}</h3>
+                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "20px", fontWeight: 500, color: t.text, margin: 0, flex: 1 }}>{project.name}</h3>
                     {project.link && (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={hovered === i ? project.color : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", flexShrink: 0 }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hovered === i ? project.color : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hovered === i ? "translate(2px, -2px)" : "none", flexShrink: 0 }}>
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
                     )}
                   </div>
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, margin: "0 0 10px", letterSpacing: "0.3px", opacity: 0.8 }}>{project.position}</p>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, lineHeight: 1.65, margin: "0 0 14px" }}>{project.desc}</p>
+                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, margin: "0 0 12px", letterSpacing: "0.3px", opacity: 0.8 }}>{project.position}</p>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, lineHeight: 1.65, margin: "0 0 16px" }}>{project.desc}</p>
                   {project.stats.length > 0 && (
-                    <div style={{ marginTop: "auto", borderTop: `1px solid ${t.border}`, paddingTop: "12px", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, isMobile ? 2 : 4)}, 1fr)`, gap: "8px" }}>
+                    <div style={{ marginTop: "auto", borderTop: `1px solid ${t.border}`, paddingTop: "14px", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, 4)}, 1fr)`, gap: "8px" }}>
                       {project.stats.map((stat) => (
                         <div key={stat.label}>
-                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "15px", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{stat.value}</p>
+                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "16px", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{stat.value}</p>
                           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: t.textDim, margin: 0, letterSpacing: "0.3px" }}>{stat.label}</p>
                         </div>
                       ))}
@@ -680,7 +558,6 @@ function ProjectsSection({ t, isMobile }) {
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("timeline");
   const [theme, setTheme] = useState("dark");
-  const isMobile = useIsMobile();
   const t = THEMES[theme];
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   return (
@@ -695,12 +572,12 @@ export default function Portfolio() {
       `}</style>
       <div style={{ background: t.bg, minHeight: "100vh", color: t.text, position: "relative", transition: "background 0.4s ease, color 0.4s ease" }}>
         <MouseBlob t={t} />
-        <Nav active={activeSection} onNavigate={setActiveSection} theme={theme} toggleTheme={toggleTheme} t={t} isMobile={isMobile} />
-        {!isMobile && <SocialBar t={t} theme={theme} isMobile={false} />}
+        <Nav active={activeSection} onNavigate={setActiveSection} theme={theme} toggleTheme={toggleTheme} t={t} />
+        <SocialBar t={t} theme={theme} />
         <div key={`${activeSection}-${theme}`} style={{ animation: "fadeSection 0.45s cubic-bezier(0.33, 1, 0.68, 1)", position: "relative", zIndex: 2 }}>
-          {activeSection === "timeline" && <TimelineSection t={t} theme={theme} isMobile={isMobile} />}
-          {activeSection === "projects" && <ProjectsSection t={t} isMobile={isMobile} />}
-          {activeSection === "contact" && <ContactSection t={t} isMobile={isMobile} />}
+          {activeSection === "timeline" && <TimelineSection t={t} />}
+          {activeSection === "projects" && <ProjectsSection t={t} />}
+          {activeSection === "contact" && <ContactSection t={t} />}
         </div>
       </div>
     </>

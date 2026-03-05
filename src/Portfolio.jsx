@@ -306,12 +306,14 @@ function Nav({ active, onNavigate, theme, toggleTheme, t, isMobile }) {
   );
 }
 
+// Mobile Timeline: vertical scrolling cards
 function TimelineMobile({ t }) {
   return (
     <div style={{ minHeight: "100vh", padding: "80px 16px 100px" }}>
+      {/* Hero */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", marginBottom: "20px" }}>
-          <img src="/me.webp" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="/me.webp" alt="Basti De Luna" fetchPriority="high" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "26px", fontWeight: 600, color: t.text, margin: "0 0 4px", lineHeight: 1.1, letterSpacing: "-0.8px" }}>
               Basti De Luna
@@ -341,6 +343,7 @@ function TimelineMobile({ t }) {
         </a>
       </div>
 
+      {/* Timeline cards */}
       <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "16px" }}>EXPERIENCE</p>
       <div style={{ position: "relative" }}>
         <div style={{ position: "absolute", left: "7px", top: 0, bottom: 0, width: "1.5px", background: t.border }} />
@@ -417,7 +420,7 @@ function TimelineSection({ t, isMobile }) {
       <div style={{ width: "100%", maxWidth: "1600px", display: "flex", position: "relative" }}>
       <div style={{ width: "42%", flexShrink: 0, display: "flex", alignItems: "center", padding: "0 clamp(12px, 2vw, 36px) 0 clamp(20px, 3vw, 56px)", position: "relative", zIndex: 3, overflow: "hidden" }}>
         <div style={{ display: "flex", gap: "clamp(10px, 1.2vw, 20px)", alignItems: "flex-start", width: "100%", minWidth: 0 }}>
-          <img src="/me.webp" alt="Basti De Luna" style={{ width: "clamp(100px, 13vw, 210px)", height: "clamp(100px, 13vw, 210px)", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="/me.webp" alt="Basti De Luna" fetchPriority="high" style={{ width: "clamp(100px, 13vw, 210px)", height: "clamp(100px, 13vw, 210px)", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 3.5vw, 48px)", fontWeight: 600, color: t.text, margin: "0 0 8px", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
               Basti De Luna
@@ -430,21 +433,21 @@ function TimelineSection({ t, isMobile }) {
             </p>
             <div style={{ display: "flex", gap: "20px", marginBottom: "16px" }}>
               <div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 32px)", fontWeight: 600, color: t.text, margin: 0 }}>3+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Years</p>
+                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 52px)", fontWeight: 600, color: t.text, margin: 0 }}>3+</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 16px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Years</p>
               </div>
               <div style={{ width: "1px", background: t.border }} />
               <div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 32px)", fontWeight: 600, color: t.text, margin: 0 }}>10+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Brands</p>
+                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 52px)", fontWeight: 600, color: t.text, margin: 0 }}>10+</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 16px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Brands</p>
               </div>
               <div style={{ width: "1px", background: t.border }} />
               <div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 32px)", fontWeight: 600, color: t.text, margin: 0 }}>50M+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Impressions</p>
+                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 52px)", fontWeight: 600, color: t.text, margin: 0 }}>50M+</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 16px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Impressions</p>
               </div>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(11px, 1vw, 13px)", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(11px, 1vw, 18px)", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.75 }}>
               I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side..
             </p>
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.5px", textDecoration: "none", transition: "all 0.25s ease" }}
@@ -474,32 +477,32 @@ function TimelineSection({ t, isMobile }) {
         {TIMELINE_DATA.map((item, i) => (
           <div key={i} style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 clamp(24px, 4vw, 60px)", scrollSnapAlign: "start", position: "relative", zIndex: 1 }}>
 
-            <div style={{ opacity: i === activeIndex ? 1 : 0.12, transform: `translateY(${i === activeIndex ? 0 : 24}px)`, transition: "all 0.6s cubic-bezier(0.33, 1, 0.68, 1)", maxWidth: "500px" }}>
+            <div style={{ opacity: i === activeIndex ? 1 : 0.12, transform: `translateY(${i === activeIndex ? 0 : 24}px)`, transition: "all 0.6s cubic-bezier(0.33, 1, 0.68, 1)", maxWidth: "680px" }}>
               <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "5px 10px", borderRadius: "4px", background: t.accentGlow, border: `1px solid ${t.accent}30`, color: t.accent, fontSize: "10px", fontFamily: "'DM Mono', monospace", fontWeight: 500, letterSpacing: "1.5px", marginBottom: "16px", lineHeight: 1 }}>
                 {item.tag}
               </div>
               <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: t.silver, margin: "0 0 12px" }}>{item.date}</p>
               <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "6px" }}>
                 {item.logo && (
-                  <div style={{ width: "48px", height: "48px", borderRadius: "12px", overflow: "hidden", border: `1px solid ${t.border}`, flexShrink: 0 }}>
+                  <div style={{ width: "clamp(40px, 4vw, 72px)", height: "clamp(40px, 4vw, 72px)", borderRadius: "12px", overflow: "hidden", border: `1px solid ${t.border}`, flexShrink: 0 }}>
                     <img src={item.logo} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
                 )}
                 {item.link ? (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 600, color: t.text, lineHeight: 1.1, letterSpacing: "-0.8px", textDecoration: "none", display: "inline-flex", alignItems: "baseline", gap: "8px" }}>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 64px)", fontWeight: 600, color: t.text, lineHeight: 1.1, letterSpacing: "-0.8px", textDecoration: "none", display: "inline-flex", alignItems: "baseline", gap: "8px" }}>
                     {item.title}
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2" style={{ flexShrink: 0, position: "relative", top: "2px" }}>
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </a>
                 ) : (
-                  <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 600, color: t.text, lineHeight: 1.1, letterSpacing: "-0.8px" }}>
+                  <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3.5vw, 64px)", fontWeight: 600, color: t.text, lineHeight: 1.1, letterSpacing: "-0.8px" }}>
                     {item.title}
                   </h2>
                 )}
               </div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: t.accent, margin: "0 0 16px", fontWeight: 500 }}>{item.subtitle}</p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, margin: 0, lineHeight: 1.75, maxWidth: "440px" }}>{item.desc}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.2vw, 20px)", color: t.accent, margin: "0 0 16px", fontWeight: 500 }}>{item.subtitle}</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.1vw, 18px)", color: t.textMuted, margin: 0, lineHeight: 1.75, maxWidth: "560px" }}>{item.desc}</p>
               {item.products.length > 0 && (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "18px" }}>
                   {item.products.map((p) => (
@@ -569,6 +572,7 @@ function ContactSection({ t, isMobile, theme }) {
   if (isMobile) {
     return (
       <div style={{ minHeight: "100vh", padding: "80px 16px 100px" }}>
+        {/* Card stack - smaller on mobile */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "24px" }}>
           <div style={{ position: "relative", width: "160px", height: "320px" }}>
             {Array.from({ length: Math.min(VISIBLE, 6) }).map((_, i) => {

@@ -523,6 +523,28 @@ function TimelineSection({ t, isMobile }) {
   );
 }
 
+function ContactList({ t, hoveredContact, setHoveredContact }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      {CONTACTS.map((contact, i) => (
+        <a key={contact.platform} href={contact.link} target="_blank" rel="noopener noreferrer"
+          onMouseEnter={() => setHoveredContact(i)}
+          onMouseLeave={() => setHoveredContact(null)}
+          style={{ padding: "14px 18px", borderRadius: "10px", background: hoveredContact === i ? t.accentGlow : t.cardBg, border: `1px solid ${hoveredContact === i ? t.accent + "30" : t.border}`, display: "flex", alignItems: "center", gap: "14px", textDecoration: "none", transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(4px)" : "none" }}>
+          <span style={{ fontSize: "16px", width: "24px", textAlign: "center", color: hoveredContact === i ? t.accent : t.textDim }}>{contact.icon}</span>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.text, margin: 0, fontWeight: 500 }}>{contact.platform}</p>
+            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, margin: 0 }}>{contact.value}</p>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={hoveredContact === i ? t.accent : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(2px)" : "none" }}>
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  );
+}
+
 function ContactSection({ t, isMobile, theme }) {
   const [hoveredContact, setHoveredContact] = useState(null);
   const [offset, setOffset] = useState(0);
@@ -543,22 +565,7 @@ function ContactSection({ t, isMobile, theme }) {
   }, []);
   const VISIBLE = 8;
 
-  const ContactList = () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      {CONTACTS.map((c, i) => (
-        <a key={c.platform} href={c.link} target="_blank" rel="noopener noreferrer" onMouseEnter={() => setHoveredContact(i)} onMouseLeave={() => setHoveredContact(null)} style={{ padding: "14px 18px", borderRadius: "10px", background: hoveredContact === i ? t.accentGlow : t.cardBg, border: `1px solid ${hoveredContact === i ? t.accent + "30" : t.border}`, display: "flex", alignItems: "center", gap: "14px", textDecoration: "none", transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(4px)" : "none" }}>
-          <span style={{ fontSize: "16px", width: "24px", textAlign: "center", color: hoveredContact === i ? t.accent : t.textDim }}>{c.icon}</span>
-          <div style={{ flex: 1 }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.text, margin: 0, fontWeight: 500 }}>{c.platform}</p>
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, margin: 0 }}>{c.value}</p>
-          </div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={hoveredContact === i ? t.accent : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(2px)" : "none" }}>
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-      ))}
-    </div>
-  );
+
 
   if (isMobile) {
     return (
@@ -610,7 +617,7 @@ function ContactSection({ t, isMobile, theme }) {
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, lineHeight: 1.7, margin: "0 0 20px" }}>
           Marketing & ops professional with 3+ years experience. Currently studying CS and open to new opportunities.
         </p>
-        <ContactList />
+        <ContactList t={t} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
         {/* Social icons on mobile at bottom */}
         <div style={{ marginTop: "28px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
           {SOCIALS.map((s) => (
@@ -672,7 +679,7 @@ function ContactSection({ t, isMobile, theme }) {
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, lineHeight: 1.7, margin: "0 0 36px" }}>
           Marketing & ops professional with 3+ years experience. Currently studying CS and open to new opportunities.
         </p>
-        <ContactList />
+        <ContactList t={t} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
       </div>
     </div>
   );

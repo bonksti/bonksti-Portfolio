@@ -97,7 +97,7 @@ const TIMELINE_DATA = [
     products: [],
     link: "https://x.com/southernlabs",
     glowColor: "rgba(59, 130, 246, 0.2)",
-    logo: "/logos/southernlabs.webp",
+    logo: "/logos/southern.webp",
   },
 ];
 

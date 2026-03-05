@@ -462,13 +462,14 @@ function TimelineSection({ t, isMobile }) {
       </div>
       <div ref={containerRef} style={{ flex: 1, overflowY: "auto", scrollSnapType: "y mandatory", scrollbarWidth: "none", position: "relative" }}>
         <div style={{ position: "fixed", top: 0, right: 0, width: "calc(58% - 60px)", height: "100vh", background: `radial-gradient(ellipse at 80% 50%, ${activeItem.glowColor}, transparent 60%)`, pointerEvents: "none", zIndex: 0, transition: "background 0.8s ease" }} />
-        {activeItem.logo && (
-          <div style={{ position: "fixed", top: "50%", right: "2%", transform: "translateY(-50%)", width: "120px", height: "120px", borderRadius: "20px", overflow: "hidden", opacity: 0.25, pointerEvents: "none", zIndex: 0, transition: "opacity 0.6s ease" }}>
-            <img src={activeItem.logo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-        )}
+
         {TIMELINE_DATA.map((item, i) => (
           <div key={i} style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 clamp(24px, 4vw, 60px)", scrollSnapAlign: "start", position: "relative", zIndex: 1 }}>
+            {item.logo && i === activeIndex && (
+              <div style={{ position: "absolute", top: "clamp(80px, 10vh, 120px)", right: "clamp(20px, 3vw, 48px)", width: "72px", height: "72px", borderRadius: "16px", overflow: "hidden", border: `1px solid ${t.border}`, opacity: 1, flexShrink: 0 }}>
+                <img src={item.logo} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+            )}
             <div style={{ opacity: i === activeIndex ? 1 : 0.12, transform: `translateY(${i === activeIndex ? 0 : 24}px)`, transition: "all 0.6s cubic-bezier(0.33, 1, 0.68, 1)", maxWidth: "500px" }}>
               <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "5px 10px", borderRadius: "4px", background: t.accentGlow, border: `1px solid ${t.accent}30`, color: t.accent, fontSize: "10px", fontFamily: "'DM Mono', monospace", fontWeight: 500, letterSpacing: "1.5px", marginBottom: "16px", lineHeight: 1 }}>
                 {item.tag}

@@ -53,7 +53,7 @@ const TIMELINE_DATA = [
     products: ["Extsy", "Verse8", "Mey Real", "Mey Network"],
     link: "https://x.com/surgence_io",
     glowColor: "rgba(0, 255, 170, 0.2)",
-    logo: "/logos/surgence.jpg",
+    logo: "/logos/surgence.webp",
   },
   {
     date: "Apr 2024 – Oct 2025",
@@ -64,7 +64,7 @@ const TIMELINE_DATA = [
     products: ["Shards Guilds", "RewardsHQ"],
     link: "https://x.com/shardsofficial",
     glowColor: "rgba(239, 68, 68, 0.2)",
-    logo: "/logos/shards.jpg",
+    logo: "/logos/shards.webp",
   },
   {
     date: "Feb 2024 – Apr 2024",
@@ -97,7 +97,7 @@ const TIMELINE_DATA = [
     products: [],
     link: "https://x.com/southernlabs",
     glowColor: "rgba(59, 130, 246, 0.2)",
-    logo: "/logos/southernlabs.jpg",
+    logo: "/logos/southernlabs.webp",
   },
 ];
 
@@ -217,17 +217,17 @@ const SOCIALS = [
 ];
 
 const PORTFOLIO_CARDS = [
-  { title: "Surgence Labs", sub: "Marketing Agency", color: "#3b82f6", link: "https://x.com/surgence_io", logo: "/logos/surgence.jpg" },
-  { title: "Shards", sub: "Marketing & Ops", color: "#f59e0b", link: "https://x.com/shardsofficial", logo: "/logos/shards.jpg" },
-  { title: "Southern Labs", sub: "Community Platform", color: "#10b981", link: "https://www.instagram.com/southernlabsxyz", logo: "/logos/southernlabs.jpg" },
-  { title: "Extsy", sub: "DeFi Platform", color: "#06b6d4", link: "https://x.com/extsyplatform", logo: "/logos/extsy.jpg" },
-  { title: "Mey Real", sub: "Real Estate Tokenization", color: "#a855f7", link: "https://x.com/meyreal_io", logo: "/logos/meyreal.jpg" },
-  { title: "Mey Network", sub: "Layer 1 Blockchain", color: "#ec4899", link: "https://x.com/mey_network", logo: "/logos/meynetwork.jpg" },
-  { title: "Verse8", sub: "Gaming Platform", color: "#f43f5e", link: "https://x.com/verse_eight", logo: "/logos/verse8.jpg" },
-  { title: "RewardsHQ", sub: "Rewards Platform", color: "#eab308", link: "https://x.com/RewardsHQ", logo: "/logos/rewardshq.jpg" },
-  { title: "Aura", sub: "Tech Platform", color: "#14b8a6", link: "https://aura.tech/", logo: "/logos/aura.jpg" },
-  { title: "Dininho Adventures", sub: "Web3 Game", color: "#8b5cf6", link: "https://x.com/DininhoNFT", logo: "/logos/dininho.jpg" },
-  { title: "South Locker", sub: "Clothing Brand", color: "#f97316", link: "https://www.instagram.com/southlocker", logo: "/logos/southlocker.jpg" },
+  { title: "Surgence Labs", sub: "Marketing Agency", color: "#3b82f6", link: "https://x.com/surgence_io", logo: "/logos/surgence.webp" },
+  { title: "Shards", sub: "Marketing & Ops", color: "#f59e0b", link: "https://x.com/shardsofficial", logo: "/logos/shards.webp" },
+  { title: "Southern Labs", sub: "Community Platform", color: "#10b981", link: "https://www.instagram.com/southernlabsxyz", logo: "/logos/southernlabs.webp" },
+  { title: "Extsy", sub: "DeFi Platform", color: "#06b6d4", link: "https://x.com/extsyplatform", logo: "/logos/extsy.webp" },
+  { title: "Mey Real", sub: "Real Estate Tokenization", color: "#a855f7", link: "https://x.com/meyreal_io", logo: "/logos/meyreal.webp" },
+  { title: "Mey Network", sub: "Layer 1 Blockchain", color: "#ec4899", link: "https://x.com/mey_network", logo: "/logos/meynetwork.webp" },
+  { title: "Verse8", sub: "Gaming Platform", color: "#f43f5e", link: "https://x.com/verse_eight", logo: "/logos/verse8.webp" },
+  { title: "RewardsHQ", sub: "Rewards Platform", color: "#eab308", link: "https://x.com/RewardsHQ", logo: "/logos/rewardshq.webp" },
+  { title: "Aura", sub: "Tech Platform", color: "#14b8a6", link: "https://aura.tech/", logo: "/logos/aura.webp" },
+  { title: "Dininho Adventures", sub: "Web3 Game", color: "#8b5cf6", link: "https://x.com/DininhoNFT", logo: "/logos/dininho.webp" },
+  { title: "South Locker", sub: "Clothing Brand", color: "#f97316", link: "https://www.instagram.com/southlocker", logo: "/logos/southlocker.webp" },
 ];
 
 function useIsMobile() {

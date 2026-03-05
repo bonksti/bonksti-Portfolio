@@ -280,7 +280,6 @@ function SocialBar({ t, theme, isMobile }) {
             href={s.link}
             target="_blank"
             rel="noopener noreferrer"
-            title={s.title}
             aria-label={s.title}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
@@ -295,7 +294,7 @@ function SocialBar({ t, theme, isMobile }) {
               background: hovered === i ? t.accentGlow : t.cardBg,
               border: `1px solid ${hovered === i ? t.accent + "40" : t.border}`,
               transition: "all 0.25s ease",
-              transform: hovered === i ? "translateY(-3px)" : "none"
+              transform: hovered === i ? "translateY(-3px)" : "none",
             }}
           >
             <img src={s.icon} alt="" aria-hidden="true" style={{ width: "20px", height: "20px", opacity: hovered === i ? 1 : 0.7, transition: "opacity 0.25s ease", filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
@@ -325,7 +324,7 @@ function Nav({ active, onNavigate, theme, toggleTheme, t, isMobile }) {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: isMobile ? "12px 16px" : "16px 32px",
         background: `linear-gradient(to bottom, ${t.gradientTop} 50%, transparent)`,
-        backdropFilter: "blur(12px)"
+        backdropFilter: "blur(12px)",
       }}
     >
       <div style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "15px" : "clamp(16px, 1.4vw, 22px)", fontWeight: 500, color: t.text, letterSpacing: "-0.3px", minWidth: isMobile ? "auto" : "180px" }}>
@@ -372,7 +371,7 @@ function Nav({ active, onNavigate, theme, toggleTheme, t, isMobile }) {
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: "16px",
             color: t.navInactive,
-            transition: "all 0.3s ease"
+            transition: "all 0.3s ease",
           }}
         >
           {theme === "dark" ? "☀" : "☾"}
@@ -400,7 +399,7 @@ function TimelineMobile({ t }) {
             </p>
           </div>
         </div>
-        <div style={{ display: "flex", gap: "0", background: t.cardBg, border: `1px solid ${t.border}`, borderRadius: "12px", overflow: "hidden" }}>
+        <div style={{ display: "flex", background: t.cardBg, border: `1px solid ${t.border}`, borderRadius: "12px", overflow: "hidden" }}>
           {[["3+", "Years"], ["10+", "Brands"], ["50M+", "Impressions"]].map(([val, label], i) => (
             <div key={label} style={{ flex: 1, padding: "14px 0", textAlign: "center", borderRight: i < 2 ? `1px solid ${t.border}` : "none" }}>
               <p style={{ fontFamily: "'Fraunces', serif", fontSize: "22px", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{val}</p>
@@ -416,11 +415,9 @@ function TimelineMobile({ t }) {
           View Resume
         </a>
       </div>
-
-      <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "16px" }}>EXPERIENCE</p>
       <div style={{ position: "relative" }}>
         <div style={{ position: "absolute", left: "7px", top: 0, bottom: 0, width: "1.5px", background: t.border }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           {TIMELINE_DATA.map((item, i) => (
             <div key={i} style={{ display: "flex", gap: "20px", paddingBottom: "24px" }}>
               <div style={{ flexShrink: 0, width: "16px", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "4px" }}>
@@ -493,29 +490,13 @@ function TimelineSection({ t, isMobile }) {
     <div style={{ height: "100vh", display: "flex", position: "relative", overflow: "hidden", justifyContent: "center" }}>
       <div style={{ width: "100%", display: "flex", position: "relative" }}>
 
-        <div style={{
-          width: "42%",
-          flexShrink: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          padding: "0 clamp(16px, 2vw, 48px) 0 clamp(24px, 3.5vw, 80px)",
-          position: "relative",
-          zIndex: 3,
-        }}>
+        <div style={{ width: "42%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 clamp(16px, 2vw, 48px) 0 clamp(24px, 3.5vw, 80px)", position: "relative", zIndex: 3 }}>
           <div style={{ display: "flex", gap: "clamp(14px, 1.5vw, 28px)", alignItems: "flex-start", width: "100%" }}>
             <img
               src="/me.webp"
               alt="Basti De Luna"
               fetchPriority="high"
-              style={{
-                width: "clamp(120px, 14vw, 260px)",
-                height: "clamp(120px, 14vw, 260px)",
-                borderRadius: "clamp(14px, 1.2vw, 24px)",
-                objectFit: "cover",
-                flexShrink: 0,
-                border: `1px solid ${t.border}`,
-              }}
+              style={{ width: "clamp(120px, 14vw, 260px)", height: "clamp(120px, 14vw, 260px)", borderRadius: "clamp(14px, 1.2vw, 24px)", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }}
             />
             <div style={{ flex: 1, minWidth: 0 }}>
               <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(36px, 3.5vw, 72px)", fontWeight: 600, color: t.text, margin: "0 0 clamp(6px, 0.6vw, 14px)", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
@@ -545,20 +526,7 @@ function TimelineSection({ t, isMobile }) {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: "8px",
-                  padding: "clamp(8px, 0.7vw, 14px) clamp(14px, 1.2vw, 24px)",
-                  borderRadius: "8px",
-                  border: `1px solid ${t.accent}40`,
-                  background: t.accentGlow,
-                  color: t.accent,
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "clamp(11px, 0.9vw, 16px)",
-                  letterSpacing: "0.5px",
-                  textDecoration: "none",
-                  transition: "all 0.25s ease",
-                  minHeight: "44px",
-                }}
+                style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "clamp(8px, 0.7vw, 14px) clamp(14px, 1.2vw, 24px)", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.9vw, 16px)", letterSpacing: "0.5px", textDecoration: "none", transition: "all 0.25s ease", minHeight: "44px" }}
                 onMouseEnter={e => { e.currentTarget.style.background = t.accentGlowStrong; e.currentTarget.style.borderColor = t.accent; }}
                 onMouseLeave={e => { e.currentTarget.style.background = t.accentGlow; e.currentTarget.style.borderColor = t.accent + "40"; }}
               >
@@ -589,7 +557,6 @@ function TimelineSection({ t, isMobile }) {
 
         <div ref={containerRef} style={{ flex: 1, overflowY: "auto", scrollSnapType: "y mandatory", scrollbarWidth: "none", position: "relative" }}>
           <div style={{ position: "fixed", top: 0, right: 0, width: "58%", height: "100vh", background: `radial-gradient(ellipse at 80% 50%, ${activeItem.glowColor}, transparent 60%)`, pointerEvents: "none", zIndex: 0, transition: "background 0.8s ease" }} />
-
           {TIMELINE_DATA.map((item, i) => (
             <div key={i} style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 clamp(28px, 4vw, 80px)", scrollSnapAlign: "start", position: "relative", zIndex: 1 }}>
               <div style={{ opacity: i === activeIndex ? 1 : 0.12, transform: `translateY(${i === activeIndex ? 0 : 24}px)`, transition: "all 0.6s cubic-bezier(0.33, 1, 0.68, 1)", maxWidth: "900px" }}>
@@ -645,10 +612,15 @@ function ContactList({ t, hoveredContact, setHoveredContact }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       {CONTACTS.map((contact, i) => (
-        <a key={contact.platform} href={contact.link} target="_blank" rel="noopener noreferrer"
+        <a
+          key={contact.platform}
+          href={contact.link}
+          target="_blank"
+          rel="noopener noreferrer"
           onMouseEnter={() => setHoveredContact(i)}
           onMouseLeave={() => setHoveredContact(null)}
-          style={{ padding: "clamp(12px, 1.1vw, 20px) clamp(14px, 1.3vw, 24px)", borderRadius: "10px", background: hoveredContact === i ? t.accentGlow : t.cardBg, border: `1px solid ${hoveredContact === i ? t.accent + "30" : t.border}`, display: "flex", alignItems: "center", gap: "clamp(10px, 1vw, 18px)", textDecoration: "none", transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(4px)" : "none", minHeight: "44px" }}>
+          style={{ padding: "clamp(12px, 1.1vw, 20px) clamp(14px, 1.3vw, 24px)", borderRadius: "10px", background: hoveredContact === i ? t.accentGlow : t.cardBg, border: `1px solid ${hoveredContact === i ? t.accent + "30" : t.border}`, display: "flex", alignItems: "center", gap: "clamp(10px, 1vw, 18px)", textDecoration: "none", transition: "all 0.3s ease", transform: hoveredContact === i ? "translateX(4px)" : "none", minHeight: "44px" }}
+        >
           <span style={{ fontSize: "clamp(14px, 1.2vw, 20px)", width: "clamp(20px, 1.8vw, 32px)", textAlign: "center", color: hoveredContact === i ? t.accent : t.silver }}>{contact.icon}</span>
           <div style={{ flex: 1 }}>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1vw, 18px)", color: t.text, margin: 0, fontWeight: 500 }}>{contact.platform}</p>
@@ -663,11 +635,12 @@ function ContactList({ t, hoveredContact, setHoveredContact }) {
   );
 }
 
-function ContactSection({ t, isMobile, theme }) {
+function ContactSection({ t, isMobile }) {
   const [hoveredContact, setHoveredContact] = useState(null);
   const [offset, setOffset] = useState(0);
   const rafRef = useRef(null);
   const lastTimeRef = useRef(null);
+
   useEffect(() => {
     const speed = 0.0008;
     const animate = (time) => {
@@ -681,44 +654,48 @@ function ContactSection({ t, isMobile, theme }) {
     rafRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
-  const VISIBLE = 8;
 
-  const cardSize = "clamp(180px, 16vw, 280px)";
+  const VISIBLE = 8;
+  const stackCardW = "clamp(180px, 16vw, 280px)";
+  const stackCardH = "clamp(180px, 16vw, 280px)";
+
+  const renderCard = (i, cardW, cardH, yMultiplier, maxVisible) => {
+    const stackPos = maxVisible - 1 - i;
+    const cardFloat = (offset + stackPos) % PORTFOLIO_CARDS.length;
+    const cardIdx = Math.floor(cardFloat) % PORTFOLIO_CARDS.length;
+    const card = PORTFOLIO_CARDS[cardIdx < 0 ? cardIdx + PORTFOLIO_CARDS.length : cardIdx];
+    const frac = offset % 1;
+    const pos = stackPos + (1 - frac);
+    const yShift = pos * yMultiplier;
+    const scale = 1.08 - pos * 0.05;
+    const blur = Math.max(0, (pos - 1) * 3);
+    const cardOpacity = pos > maxVisible - 1.5 ? Math.max(0, (maxVisible - pos) * 2) : pos < 0.3 ? Math.max(0, pos * 3.3) : 1;
+    const cardEl = (
+      <div style={{ position: "absolute", top: "50%", left: "50%", width: cardW, height: cardH, borderRadius: isMobile ? "18px" : "clamp(16px, 1.4vw, 28px)", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: maxVisible - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
+        {card.logo ? (
+          <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        ) : (
+          <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: isMobile ? "32px" : "clamp(32px, 3vw, 56px)", height: isMobile ? "32px" : "clamp(32px, 3vw, 56px)", borderRadius: isMobile ? "8px" : "clamp(8px, 0.8vw, 14px)", background: card.color, opacity: 0.3, marginBottom: isMobile ? "8px" : "clamp(8px, 0.8vw, 14px)" }} />
+            <p style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "12px" : "clamp(13px, 1.1vw, 20px)", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 16px" }}>{card.title}</p>
+          </div>
+        )}
+      </div>
+    );
+    return card.link ? (
+      <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" aria-label={card.title} style={{ textDecoration: "none" }}>{cardEl}</a>
+    ) : (
+      <div key={i}>{cardEl}</div>
+    );
+  };
 
   if (isMobile) {
+    const mobileVisible = 6;
     return (
       <div style={{ minHeight: "100vh", padding: "80px 16px 100px" }}>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "24px" }}>
           <div style={{ position: "relative", width: "160px", height: "320px" }}>
-            {Array.from({ length: Math.min(VISIBLE, 6) }).map((_, i) => {
-              const stackPos = Math.min(VISIBLE, 6) - 1 - i;
-              const cardFloat = (offset + stackPos) % PORTFOLIO_CARDS.length;
-              const cardIdx = Math.floor(cardFloat) % PORTFOLIO_CARDS.length;
-              const card = PORTFOLIO_CARDS[cardIdx < 0 ? cardIdx + PORTFOLIO_CARDS.length : cardIdx];
-              const frac = offset % 1;
-              const pos = stackPos + (1 - frac);
-              const yShift = pos * 22;
-              const scale = 1.08 - pos * 0.05;
-              const blur = Math.max(0, (pos - 1) * 3);
-              const cardOpacity = pos > 5.5 ? Math.max(0, (6 - pos) * 2) : pos < 0.3 ? Math.max(0, pos * 3.3) : 1;
-              const cardEl = (
-                <div style={{ position: "absolute", top: "50%", left: "50%", width: "150px", height: "150px", borderRadius: "18px", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: Math.min(VISIBLE, 6) - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
-                  {card.logo ? (
-                    <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  ) : (
-                    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                      <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: card.color, opacity: 0.3, marginBottom: "8px" }} />
-                      <p style={{ fontFamily: "'Fraunces', serif", fontSize: "12px", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 12px" }}>{card.title}</p>
-                    </div>
-                  )}
-                </div>
-              );
-              return card.link ? (
-                <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" aria-label={card.title} style={{ textDecoration: "none" }}>{cardEl}</a>
-              ) : (
-                <div key={i}>{cardEl}</div>
-              );
-            })}
+            {Array.from({ length: mobileVisible }).map((_, i) => renderCard(i, "150px", "150px", 22, mobileVisible))}
           </div>
         </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "26px", fontWeight: 500, color: t.text, margin: "0 0 4px", letterSpacing: "-0.6px", textAlign: "center" }}>
@@ -727,7 +704,6 @@ function ContactSection({ t, isMobile, theme }) {
         <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, textAlign: "center", letterSpacing: "0.5px", marginBottom: "32px" }}>
           Basti De Luna — Portfolio
         </p>
-        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "12px" }}>GET IN TOUCH</p>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "28px", fontWeight: 500, color: t.text, margin: "0 0 8px", lineHeight: 1.15, letterSpacing: "-0.5px" }}>
           Let's work together.
         </h2>
@@ -739,43 +715,11 @@ function ContactSection({ t, isMobile, theme }) {
     );
   }
 
-  const stackCardW = "clamp(180px, 16vw, 280px)";
-  const stackCardH = "clamp(180px, 16vw, 280px)";
-  const stackContainerH = `calc(${stackCardH} + clamp(180px, 16vw, 280px))`;
-
   return (
     <div style={{ height: "100vh", display: "flex", position: "relative" }}>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 48px", overflow: "hidden" }}>
-        <div style={{ position: "relative", width: stackCardW, height: stackContainerH }}>
-          {Array.from({ length: VISIBLE }).map((_, i) => {
-            const stackPos = VISIBLE - 1 - i;
-            const cardFloat = (offset + stackPos) % PORTFOLIO_CARDS.length;
-            const cardIdx = Math.floor(cardFloat) % PORTFOLIO_CARDS.length;
-            const card = PORTFOLIO_CARDS[cardIdx < 0 ? cardIdx + PORTFOLIO_CARDS.length : cardIdx];
-            const frac = offset % 1;
-            const pos = stackPos + (1 - frac);
-            const yShift = pos * 32;
-            const scale = 1.08 - pos * 0.05;
-            const blur = Math.max(0, (pos - 1) * 3);
-            const cardOpacity = pos > VISIBLE - 1.5 ? Math.max(0, (VISIBLE - pos) * 2) : pos < 0.3 ? Math.max(0, pos * 3.3) : 1;
-            const cardEl = (
-              <div style={{ position: "absolute", top: "50%", left: "50%", width: stackCardW, height: stackCardH, borderRadius: "clamp(16px, 1.4vw, 28px)", overflow: "hidden", background: card.logo ? "none" : `linear-gradient(145deg, ${card.color}20, ${t.surface})`, border: `1px solid ${card.logo ? "rgba(255,255,255,0.1)" : card.color + "30"}`, transform: `translate(-50%, -50%) translateY(${yShift}px) scale(${scale})`, opacity: cardOpacity, filter: blur > 0.1 ? `blur(${blur}px)` : "none", zIndex: VISIBLE - stackPos, willChange: "transform, opacity, filter", cursor: card.link ? "pointer" : "default" }}>
-                {card.logo ? (
-                  <img src={card.logo} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                ) : (
-                  <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ width: "clamp(32px, 3vw, 56px)", height: "clamp(32px, 3vw, 56px)", borderRadius: "clamp(8px, 0.8vw, 14px)", background: card.color, opacity: 0.3, marginBottom: "clamp(8px, 0.8vw, 14px)" }} />
-                    <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(13px, 1.1vw, 20px)", fontWeight: 500, color: t.text, margin: 0, textAlign: "center", padding: "0 16px" }}>{card.title}</p>
-                  </div>
-                )}
-              </div>
-            );
-            return card.link ? (
-              <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" aria-label={card.title} style={{ textDecoration: "none" }}>{cardEl}</a>
-            ) : (
-              <div key={i}>{cardEl}</div>
-            );
-          })}
+        <div style={{ position: "relative", width: stackCardW, height: `calc(${stackCardH} + clamp(180px, 16vw, 280px))` }}>
+          {Array.from({ length: VISIBLE }).map((_, i) => renderCard(i, stackCardW, stackCardH, 32, VISIBLE))}
         </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(28px, 3vw, 52px)", fontWeight: 500, color: t.text, margin: "clamp(20px, 2vw, 40px) 0 clamp(6px, 0.6vw, 12px)", letterSpacing: "-0.8px", textAlign: "center" }}>
           Brands I've worked with.
@@ -784,9 +728,7 @@ function ContactSection({ t, isMobile, theme }) {
           Basti De Luna — Portfolio
         </p>
       </div>
-
       <div style={{ width: "clamp(300px, 28vw, 480px)", flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "80px clamp(24px, 2.5vw, 48px) 60px", borderLeft: `1px solid ${t.border}`, overflowY: "auto" }}>
-        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 14px)", color: t.textDim, letterSpacing: "2px", marginBottom: "clamp(16px, 1.5vw, 28px)" }}>GET IN TOUCH</p>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(30px, 3vw, 56px)", fontWeight: 500, color: t.text, margin: "0 0 clamp(8px, 0.8vw, 16px)", lineHeight: 1.15, letterSpacing: "-0.5px" }}>
           Let's work<br />together.
         </h2>
@@ -806,7 +748,6 @@ function ProjectsSection({ t, isMobile }) {
       <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${t.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${t.gridColor} 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)" }} />
       <div style={{ maxWidth: "1400px", margin: "0 auto", position: "relative", zIndex: 1 }}>
         <div style={{ marginBottom: isMobile ? "32px" : "clamp(36px, 4vw, 72px)" }}>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 14px)", color: t.textDim, letterSpacing: "2px", marginBottom: "clamp(10px, 1vw, 20px)" }}>SELECTED WORK</p>
           <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 72px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
             <span style={{ color: t.textDim, fontStyle: "italic" }}>A few</span> more things.
           </h2>
@@ -814,7 +755,11 @@ function ProjectsSection({ t, isMobile }) {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(clamp(280px, 22vw, 400px), 1fr))", gap: "clamp(10px, 1vw, 20px)" }}>
           {PROJECTS.map((project, i) => {
             const card = (
-              <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ borderRadius: "clamp(12px, 1vw, 20px)", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}>
+              <div
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{ borderRadius: "clamp(12px, 1vw, 20px)", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}
+              >
                 {project.banner && (
                   <div style={{ width: "100%", aspectRatio: "3/1", overflow: "hidden", flexShrink: 0 }}>
                     <img src={project.banner} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease", transform: hovered === i ? "scale(1.05)" : "scale(1)" }} />

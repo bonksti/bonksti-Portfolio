@@ -222,7 +222,7 @@ const PORTFOLIO_CARDS = [
   { title: "Southern Labs", sub: "Community Platform", color: "#10b981", link: "https://www.instagram.com/southernlabsxyz", logo: "/logos/southernlabs.webp" },
   { title: "Extsy", sub: "DeFi Platform", color: "#06b6d4", link: "https://x.com/extsyplatform", logo: "/logos/extsy.webp" },
   { title: "Mey Real", sub: "Real Estate Tokenization", color: "#a855f7", link: "https://x.com/meyreal_io", logo: "/logos/meyreal.webp" },
-  { title: "Mey Network", sub: "Layer 1 Blockchain", color: "#ec4899", link: "https://x.com/mey_network", logo: "/logos/meynetwork.webp" },
+  { title: "Mey Network", sub: "Layer 1 Blockchain", color: "#ec4899", link: "https://x.com/mey_network", logo: "/logos/meynet.webp" },
   { title: "Verse8", sub: "Gaming Platform", color: "#f43f5e", link: "https://x.com/verse_eight", logo: "/logos/verse8.webp" },
   { title: "RewardsHQ", sub: "Rewards Platform", color: "#eab308", link: "https://x.com/RewardsHQ", logo: "/logos/rewardshq.webp" },
   { title: "Aura", sub: "Tech Platform", color: "#14b8a6", link: "https://aura.tech/", logo: "/logos/aura.webp" },

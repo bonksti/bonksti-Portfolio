@@ -463,7 +463,7 @@ function TimelineSection({ t, isMobile }) {
       <div ref={containerRef} style={{ flex: 1, overflowY: "auto", scrollSnapType: "y mandatory", scrollbarWidth: "none", position: "relative" }}>
         <div style={{ position: "fixed", top: 0, right: 0, width: "calc(58% - 60px)", height: "100vh", background: `radial-gradient(ellipse at 80% 50%, ${activeItem.glowColor}, transparent 60%)`, pointerEvents: "none", zIndex: 0, transition: "background 0.8s ease" }} />
         {activeItem.logo && (
-          <div style={{ position: "fixed", top: "50%", right: "6%", transform: "translateY(-50%)", width: "200px", height: "200px", borderRadius: "28px", overflow: "hidden", opacity: 1, pointerEvents: "none", zIndex: 0, transition: "opacity 0.6s ease" }}>
+          <div style={{ position: "fixed", top: "50%", right: "2%", transform: "translateY(-50%)", width: "120px", height: "120px", borderRadius: "20px", overflow: "hidden", opacity: 0.25, pointerEvents: "none", zIndex: 0, transition: "opacity 0.6s ease" }}>
             <img src={activeItem.logo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         )}
@@ -509,7 +509,7 @@ function TimelineSection({ t, isMobile }) {
   );
 }
 
-function ContactSection({ t, isMobile }) {
+function ContactSection({ t, isMobile, theme }) {
   const [hoveredContact, setHoveredContact] = useState(null);
   const [offset, setOffset] = useState(0);
   const rafRef = useRef(null);
@@ -601,7 +601,7 @@ function ContactSection({ t, isMobile }) {
         <div style={{ marginTop: "28px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
           {SOCIALS.map((s) => (
             <a key={s.title} href={s.link} target="_blank" rel="noopener noreferrer" title={s.title} style={{ width: "44px", height: "44px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", background: t.cardBg, border: `1px solid ${t.border}` }}>
-              <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: 0.6 }} />
+              <img src={s.icon} alt={s.title} style={{ width: "18px", height: "18px", opacity: 0.7, filter: theme === "dark" ? "brightness(0) invert(1)" : "brightness(0)" }} />
             </a>
           ))}
         </div>
@@ -744,7 +744,7 @@ export default function Portfolio() {
         <div key={`${activeSection}-${theme}`} style={{ animation: "fadeSection 0.45s cubic-bezier(0.33, 1, 0.68, 1)", position: "relative", zIndex: 2 }}>
           {activeSection === "timeline" && <TimelineSection t={t} isMobile={isMobile} />}
           {activeSection === "projects" && <ProjectsSection t={t} isMobile={isMobile} />}
-          {activeSection === "contact" && <ContactSection t={t} isMobile={isMobile} />}
+          {activeSection === "contact" && <ContactSection t={t} isMobile={isMobile} theme={theme} />}
         </div>
       </div>
     </>

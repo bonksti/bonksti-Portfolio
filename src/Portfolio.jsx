@@ -202,7 +202,7 @@ const PROJECTS = [
 const CONTACTS = [
   { platform: "Twitter / X", value: "@bonksti", icon: "𝕏", link: "https://x.com/bonksti" },
   { platform: "LinkedIn", value: "Basti De Luna", icon: "in", link: "https://www.linkedin.com/in/bonksti/" },
-  { platform: "Email", value: "bastidluna@gmail.com", icon: "✉", link: "mailto:bastidluna@gmail.com" },
+  { platform: "Email", value: "basti@bastidluna.com", icon: "✉", link: "mailto:basti@bastidluna.com" },
   { platform: "Telegram", value: "@bonksti", icon: "✈", link: "https://t.me/bonksti" },
   { platform: "Instagram", value: "@bonksti", icon: "◎", link: "https://instagram.com/bonksti" },
 ];
@@ -213,7 +213,7 @@ const SOCIALS = [
   { icon: "/icons/telegram.png", link: "https://t.me/bonksti", title: "Telegram" },
   { icon: "/icons/instagram.png", link: "https://instagram.com/bonksti", title: "Instagram" },
   { icon: "/icons/github.png", link: "https://github.com/bonksti", title: "GitHub" },
-  { icon: "/icons/mail.png", link: "mailto:bastidluna@gmail.com", title: "Mail" },
+  { icon: "/icons/mail.png", link: "basti@bastidluna.com", title: "Mail" },
 ];
 
 const PORTFOLIO_CARDS = [

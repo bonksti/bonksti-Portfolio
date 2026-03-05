@@ -334,9 +334,13 @@ function TimelineMobile({ t }) {
             </div>
           ))}
         </div>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: "16px 0 0", lineHeight: 1.75 }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: "16px 0 12px", lineHeight: 1.75 }}>
           I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side.
         </p>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.5px", textDecoration: "none" }}>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          View Resume
+        </a>
       </div>
 
       {/* Timeline cards */}
@@ -442,9 +446,15 @@ function TimelineSection({ t, isMobile }) {
                 <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Impressions</p>
               </div>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: 0, lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.75 }}>
               I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side..
             </p>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.5px", textDecoration: "none", transition: "all 0.25s ease" }}
+              onMouseEnter={e => { e.currentTarget.style.background = t.accentGlowStrong; e.currentTarget.style.borderColor = t.accent; }}
+              onMouseLeave={e => { e.currentTarget.style.background = t.accentGlow; e.currentTarget.style.borderColor = t.accent + "40"; }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              View Resume
+            </a>
           </div>
         </div>
       </div>

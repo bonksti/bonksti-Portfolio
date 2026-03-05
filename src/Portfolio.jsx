@@ -219,7 +219,7 @@ const SOCIALS = [
 const PORTFOLIO_CARDS = [
   { title: "Surgence Labs", sub: "Marketing Agency", color: "#3b82f6", link: "https://x.com/surgence_io", logo: "/logos/surgence.webp" },
   { title: "Shards", sub: "Marketing & Ops", color: "#f59e0b", link: "https://x.com/shardsofficial", logo: "/logos/shards.webp" },
-  { title: "Southern Labs", sub: "Community Platform", color: "#10b981", link: "https://www.instagram.com/southernlabsxyz", logo: "/logos/southernlabs.webp" },
+  { title: "Southern Labs", sub: "Community Platform", color: "#10b981", link: "https://www.instagram.com/southernlabsxyz", logo: "/logos/southern.webp" },
   { title: "Extsy", sub: "DeFi Platform", color: "#06b6d4", link: "https://x.com/extsyplatform", logo: "/logos/extsy.webp" },
   { title: "Mey Real", sub: "Real Estate Tokenization", color: "#a855f7", link: "https://x.com/meyreal_io", logo: "/logos/meyreal.webp" },
   { title: "Mey Network", sub: "Layer 1 Blockchain", color: "#ec4899", link: "https://x.com/mey_network", logo: "/logos/meynet.webp" },

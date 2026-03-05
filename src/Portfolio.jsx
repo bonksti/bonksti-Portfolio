@@ -313,7 +313,7 @@ function TimelineMobile({ t }) {
       {/* Hero */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", marginBottom: "20px" }}>
-          <img src="/me.webp" fetchpriority="high" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="/me.png" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "26px", fontWeight: 600, color: t.text, margin: "0 0 4px", lineHeight: 1.1, letterSpacing: "-0.8px" }}>
               Basti De Luna
@@ -416,37 +416,38 @@ function TimelineSection({ t, isMobile }) {
   const activeItem = TIMELINE_DATA[activeIndex];
 
   return (
-    <div style={{ height: "100vh", display: "flex", position: "relative", overflow: "hidden" }}>
+    <div style={{ height: "100vh", display: "flex", position: "relative", overflow: "hidden", justifyContent: "center" }}>
+      <div style={{ width: "100%", maxWidth: "1600px", display: "flex", position: "relative" }}>
       <div style={{ width: "42%", flexShrink: 0, display: "flex", alignItems: "center", padding: "0 clamp(12px, 2vw, 36px) 0 clamp(20px, 3vw, 56px)", position: "relative", zIndex: 3, overflow: "hidden" }}>
         <div style={{ display: "flex", gap: "clamp(10px, 1.2vw, 20px)", alignItems: "flex-start", width: "100%", minWidth: 0 }}>
-          <img src="/me.webp" fetchpriority="high" alt="Basti De Luna" style={{ width: "clamp(100px, 13vw, 210px)", height: "clamp(100px, 13vw, 210px)", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="/me.webp" alt="Basti De Luna" style={{ width: "clamp(100px, 13vw, 210px)", height: "clamp(100px, 13vw, 210px)", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 3.5vw, 48px)", fontWeight: 600, color: t.text, margin: "0 0 8px", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
               Basti De Luna
             </h1>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "18px", color: t.accent, margin: "0 0 10px", fontWeight: 500, letterSpacing: "-0.2px" }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(14px, 1.4vw, 18px)", color: t.accent, margin: "0 0 10px", fontWeight: 500, letterSpacing: "-0.2px" }}>
               Marketing, Operations & Tech
             </p>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.6 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px, 1.1vw, 14px)", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.6 }}>
               Building brands from the ground up.
             </p>
             <div style={{ display: "flex", gap: "20px", marginBottom: "16px" }}>
               <div>
                 <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 32px)", fontWeight: 600, color: t.text, margin: 0 }}>3+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Years</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Years</p>
               </div>
               <div style={{ width: "1px", background: t.border }} />
               <div>
                 <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 32px)", fontWeight: 600, color: t.text, margin: 0 }}>10+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Brands</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Brands</p>
               </div>
               <div style={{ width: "1px", background: t.border }} />
               <div>
                 <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(20px, 2.2vw, 32px)", fontWeight: 600, color: t.text, margin: 0 }}>50M+</p>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Impressions</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.9vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.5px" }}>Impressions</p>
               </div>
             </div>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(11px, 1vw, 13px)", color: t.textMuted, margin: "0 0 14px", lineHeight: 1.75 }}>
               I've spent 3+ years helping teams grow through content, community, and operations, working across early NFT communities, marketing agencies, and emerging protocols. Always building something on the side..
             </p>
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "8px", border: `1px solid ${t.accent}40`, background: t.accentGlow, color: t.accent, fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.5px", textDecoration: "none", transition: "all 0.25s ease" }}
@@ -512,6 +513,7 @@ function TimelineSection({ t, isMobile }) {
             </div>
           </div>
         ))}
+      </div>
       </div>
       <div style={{ position: "absolute", bottom: "28px", left: "calc(42% + 60px + clamp(24px, 4vw, 60px))", display: "flex", alignItems: "center", gap: "8px", opacity: activeIndex === 0 ? 0.8 : 0.2, transition: "opacity 0.4s ease", animation: "pulseLeft 2s ease-in-out infinite", zIndex: 10 }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="2">
@@ -743,7 +745,6 @@ export default function Portfolio() {
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
       <style>{`
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: ${t.bg}; transition: background 0.4s ease; }

@@ -313,7 +313,7 @@ function TimelineMobile({ t }) {
       {/* Hero */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", marginBottom: "20px" }}>
-          <img src="/me.png" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="/me.webp" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "26px", fontWeight: 600, color: t.text, margin: "0 0 4px", lineHeight: 1.1, letterSpacing: "-0.8px" }}>
               Basti De Luna
@@ -415,7 +415,7 @@ function TimelineSection({ t, isMobile }) {
     <div style={{ height: "100vh", display: "flex", position: "relative", overflow: "hidden" }}>
       <div style={{ width: "42%", flexShrink: 0, display: "flex", alignItems: "center", padding: "0 clamp(24px, 3vw, 48px) 0 clamp(36px, 4vw, 72px)", position: "relative", zIndex: 3 }}>
         <div style={{ display: "flex", gap: "24px", alignItems: "flex-start" }}>
-          <img src="/me.png" alt="Basti De Luna" style={{ width: "400px", height: "400px", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="me.webp" alt="Basti De Luna" style={{ width: "400px", height: "400px", borderRadius: "16px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 3.5vw, 48px)", fontWeight: 600, color: t.text, margin: "0 0 8px", lineHeight: 1.05, letterSpacing: "-1.2px" }}>
               Basti De Luna

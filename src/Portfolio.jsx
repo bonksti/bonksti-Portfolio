@@ -306,14 +306,12 @@ function Nav({ active, onNavigate, theme, toggleTheme, t, isMobile }) {
   );
 }
 
-// Mobile Timeline: vertical scrolling cards
 function TimelineMobile({ t }) {
   return (
     <div style={{ minHeight: "100vh", padding: "80px 16px 100px" }}>
-      {/* Hero */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", marginBottom: "20px" }}>
-          <img src="/me.png" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
+          <img src="/me.webp" alt="Basti De Luna" style={{ width: "80px", height: "80px", borderRadius: "14px", objectFit: "cover", flexShrink: 0, border: `1px solid ${t.border}` }} />
           <div>
             <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "26px", fontWeight: 600, color: t.text, margin: "0 0 4px", lineHeight: 1.1, letterSpacing: "-0.8px" }}>
               Basti De Luna
@@ -343,7 +341,6 @@ function TimelineMobile({ t }) {
         </a>
       </div>
 
-      {/* Timeline cards */}
       <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: t.textDim, letterSpacing: "2px", marginBottom: "16px" }}>EXPERIENCE</p>
       <div style={{ position: "relative" }}>
         <div style={{ position: "absolute", left: "7px", top: 0, bottom: 0, width: "1.5px", background: t.border }} />
@@ -572,7 +569,6 @@ function ContactSection({ t, isMobile, theme }) {
   if (isMobile) {
     return (
       <div style={{ minHeight: "100vh", padding: "80px 16px 100px" }}>
-        {/* Card stack - smaller on mobile */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "24px" }}>
           <div style={{ position: "relative", width: "160px", height: "320px" }}>
             {Array.from({ length: Math.min(VISIBLE, 6) }).map((_, i) => {

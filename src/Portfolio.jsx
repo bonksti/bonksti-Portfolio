@@ -213,7 +213,7 @@ const SOCIALS = [
   { icon: "/icons/telegram.png", link: "https://t.me/bonksti", title: "Telegram" },
   { icon: "/icons/instagram.png", link: "https://instagram.com/bonksti", title: "Instagram" },
   { icon: "/icons/github.png", link: "https://github.com/bonksti", title: "GitHub" },
-  { icon: "/icons/mail.png", link: "basti@bastidluna.com", title: "Mail" },
+  { icon: "/icons/mail.png", link: "mailto:basti@bastidluna.com", title: "Mail" },
 ];
 
 const PORTFOLIO_CARDS = [
@@ -563,7 +563,7 @@ function TimelineSection({ t, isMobile }) {
                 <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 16px)", borderRadius: "4px", background: t.accentGlow, border: `1px solid ${t.accent}30`, color: t.accent, fontSize: "clamp(10px, 0.85vw, 14px)", fontFamily: "'DM Mono', monospace", fontWeight: 500, letterSpacing: "1.5px", marginBottom: "clamp(12px, 1.2vw, 24px)", lineHeight: 1 }}>
                   {item.tag}
                 </div>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(11px, 0.95vw, 18px)", color: t.silver, margin: "0 0 clamp(10px, 1vw, 20px)" }}>{item.date}</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 15px)", color: t.textMuted, margin: "0 0 clamp(10px, 1vw, 20px)", letterSpacing: "0.3px" }}>{item.date}</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "clamp(12px, 1.2vw, 24px)", marginBottom: "clamp(6px, 0.6vw, 12px)" }}>
                   {item.logo && (
                     <div style={{ width: "clamp(48px, 5vw, 96px)", height: "clamp(48px, 5vw, 96px)", borderRadius: "clamp(10px, 0.9vw, 18px)", overflow: "hidden", border: `1px solid ${t.border}`, flexShrink: 0 }}>
@@ -704,6 +704,10 @@ function ContactSection({ t, isMobile }) {
         <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: t.textMuted, textAlign: "center", letterSpacing: "0.5px", marginBottom: "32px" }}>
           Basti De Luna — Portfolio
         </p>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "7px", marginBottom: "12px" }}>
+          <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#10b981", flexShrink: 0, animation: "pulseGreen 2s ease infinite" }} />
+          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "1px", textTransform: "uppercase" }}>Available for work</span>
+        </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "28px", fontWeight: 500, color: t.text, margin: "0 0 8px", lineHeight: 1.15, letterSpacing: "-0.5px" }}>
           Let's work together.
         </h2>
@@ -729,6 +733,10 @@ function ContactSection({ t, isMobile }) {
         </p>
       </div>
       <div style={{ width: "clamp(300px, 28vw, 480px)", flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "80px clamp(24px, 2.5vw, 48px) 60px", borderLeft: `1px solid ${t.border}`, overflowY: "auto" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", marginBottom: "clamp(16px, 1.5vw, 24px)" }}>
+          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10b981", flexShrink: 0, animation: "pulseGreen 2s ease infinite" }} />
+          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 13px)", color: "#10b981", letterSpacing: "1px", textTransform: "uppercase" }}>Available for work</span>
+        </div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(30px, 3vw, 56px)", fontWeight: 500, color: t.text, margin: "0 0 clamp(8px, 0.8vw, 16px)", lineHeight: 1.15, letterSpacing: "-0.5px" }}>
           Let's work<br />together.
         </h2>
@@ -748,21 +756,28 @@ function ProjectsSection({ t, isMobile }) {
       <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${t.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${t.gridColor} 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)" }} />
       <div style={{ maxWidth: "1400px", margin: "0 auto", position: "relative", zIndex: 1 }}>
         <div style={{ marginBottom: isMobile ? "32px" : "clamp(36px, 4vw, 72px)" }}>
+          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: isMobile ? "10px" : "clamp(10px, 0.85vw, 13px)", color: t.accent, letterSpacing: "1.5px", marginBottom: isMobile ? "10px" : "clamp(10px, 0.9vw, 18px)", textTransform: "uppercase", opacity: 0.85 }}>
+            WORK — {PROJECTS.length} PROJECTS
+          </p>
           <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 72px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
             <span style={{ color: t.textDim, fontStyle: "italic" }}>A few</span> more things.
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(clamp(280px, 22vw, 400px), 1fr))", gap: "clamp(10px, 1vw, 20px)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(clamp(280px, 22vw, 380px), 1fr))", gap: "clamp(10px, 1vw, 20px)", gridAutoFlow: "dense" }}>
           {PROJECTS.map((project, i) => {
+            const isFeatured = !isMobile && !!project.banner;
             const card = (
               <div
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
                 style={{ borderRadius: "clamp(12px, 1vw, 20px)", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}
               >
+                {!project.banner && (
+                  <div style={{ height: "3px", background: `linear-gradient(90deg, ${project.color}70, transparent)`, flexShrink: 0 }} />
+                )}
                 {project.banner && (
-                  <div style={{ width: "100%", aspectRatio: "3/1", overflow: "hidden", flexShrink: 0 }}>
-                    <img src={project.banner} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease", transform: hovered === i ? "scale(1.05)" : "scale(1)" }} />
+                  <div style={{ width: "100%", aspectRatio: isFeatured ? "4/1" : "3/1", overflow: "hidden", flexShrink: 0 }}>
+                    <img src={project.banner} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease", transform: hovered === i ? "scale(1.04)" : "scale(1)" }} />
                   </div>
                 )}
                 <div style={{ padding: "clamp(18px, 1.8vw, 36px) clamp(20px, 2vw, 40px) clamp(22px, 2.2vw, 44px)", display: "flex", flexDirection: "column", flex: 1 }}>
@@ -780,7 +795,7 @@ function ProjectsSection({ t, isMobile }) {
                     <div style={{ marginTop: "auto", borderTop: `1px solid ${t.border}`, paddingTop: "clamp(10px, 1vw, 20px)", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, 4)}, 1fr)`, gap: "8px" }}>
                       {project.stats.map((stat) => (
                         <div key={stat.label}>
-                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(16px, 1.4vw, 24px)", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{stat.value}</p>
+                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(16px, 1.4vw, 24px)", fontWeight: 600, color: t.text, margin: "0 0 3px" }}>{stat.value}</p>
                           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(9px, 0.78vw, 13px)", color: t.textDim, margin: 0, letterSpacing: "0.3px" }}>{stat.label}</p>
                         </div>
                       ))}
@@ -789,10 +804,11 @@ function ProjectsSection({ t, isMobile }) {
                 </div>
               </div>
             );
+            const wrapperStyle = { textDecoration: "none", display: "flex", gridColumn: isFeatured ? "span 2" : undefined };
             return project.link ? (
-              <a key={i} href={project.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "flex" }}>{card}</a>
+              <a key={i} href={project.link} target="_blank" rel="noopener noreferrer" style={wrapperStyle}>{card}</a>
             ) : (
-              <div key={i}>{card}</div>
+              <div key={i} style={{ gridColumn: wrapperStyle.gridColumn }}>{card}</div>
             );
           })}
         </div>
@@ -810,11 +826,12 @@ export default function Portfolio() {
   return (
     <>
       <style>{`
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: ${t.bg}; transition: background 0.4s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background: ${t.bg}; transition: background 0.4s ease; cursor: default; }
         ::-webkit-scrollbar { display: none; }
         @keyframes fadeSection { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseLeft { 0%, 100% { opacity: 1; transform: translateY(0); } 50% { opacity: 0.5; transform: translateY(4px); } }
+        @keyframes pulseGreen { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); } 70% { box-shadow: 0 0 0 6px rgba(16,185,129,0); } }
       `}</style>
       <div style={{ background: t.bg, minHeight: "100vh", color: t.text, position: "relative", transition: "background 0.4s ease, color 0.4s ease" }}>
         {!isMobile && <MouseBlob t={t} />}

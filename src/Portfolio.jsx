@@ -757,12 +757,15 @@ function ProjectCard({ project, t }) {
   const inner = (
     <>
       {project.banner ? (
-        <div style={{ width: "100%", aspectRatio: project.featured ? "3 / 2" : "16 / 10", overflow: "hidden", flexShrink: 0 }}>
+        // Natural ratio by default: width 100% + height auto lets the image's real
+        // dimensions set the card height (no cropping). Set an optional `aspectRatio`
+        // on the project to deliberately crop to a fixed shape instead.
+        <div style={{ width: "100%", overflow: "hidden", flexShrink: 0, ...(project.aspectRatio ? { aspectRatio: project.aspectRatio } : {}) }}>
           <img
             src={project.banner}
             alt={project.name}
             loading="lazy"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered ? "scale(1.05)" : "scale(1)" }}
+            style={{ width: "100%", height: project.aspectRatio ? "100%" : "auto", objectFit: project.aspectRatio ? "cover" : "fill", display: "block", transition: "transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered ? "scale(1.05)" : "scale(1)" }}
           />
         </div>
       ) : (
@@ -797,8 +800,8 @@ function ProjectCard({ project, t }) {
     flexDirection: "column",
     borderRadius: "clamp(14px, 1.1vw, 20px)",
     background: hovered ? `linear-gradient(160deg, ${accent}12, ${t.cardBg})` : t.cardBg,
-    border: `1px solid ${hovered ? accent + "45" : t.border}`,
-    boxShadow: hovered ? `0 22px 48px -24px ${accent}66` : "0 2px 10px rgba(0,0,0,0.18)",
+    border: `1px solid ${hovered ? accent + "45" : project.featured ? accent + "30" : t.border}`,
+    boxShadow: hovered ? `0 22px 48px -24px ${accent}66` : project.featured ? `0 4px 22px -8px ${accent}22` : "0 2px 10px rgba(0,0,0,0.18)",
     overflow: "hidden",
     textDecoration: "none",
     backdropFilter: "blur(10px)",

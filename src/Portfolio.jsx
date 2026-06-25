@@ -115,6 +115,7 @@ const PROJECTS = [
     color: "#eab308",
     banner: "/banners/rewardshq.jpg",
     link: "https://x.com/RewardsHQ",
+    featured: true,
   },
   {
     name: "Shards",
@@ -129,6 +130,7 @@ const PROJECTS = [
     color: "#f59e0b",
     banner: "/banners/shards.jpg",
     link: "https://x.com/shardsofficial",
+    featured: true,
   },
   {
     name: "Mey Investor Card Campaign",
@@ -749,68 +751,87 @@ function ContactSection({ t, isMobile }) {
   );
 }
 
+function ProjectCard({ project, t }) {
+  const [hovered, setHovered] = useState(false);
+  const accent = project.color;
+  const inner = (
+    <>
+      {project.banner ? (
+        <div style={{ width: "100%", aspectRatio: project.featured ? "3 / 2" : "16 / 10", overflow: "hidden", flexShrink: 0 }}>
+          <img
+            src={project.banner}
+            alt={project.name}
+            loading="lazy"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered ? "scale(1.05)" : "scale(1)" }}
+          />
+        </div>
+      ) : (
+        <div style={{ height: "4px", background: `linear-gradient(90deg, ${accent}, ${accent}00)`, flexShrink: 0 }} />
+      )}
+      <div style={{ padding: "clamp(18px, 1.6vw, 28px) clamp(20px, 1.8vw, 30px) clamp(20px, 1.8vw, 30px)", display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "clamp(4px, 0.4vw, 7px)" }}>
+          <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(19px, 1.5vw, 26px)", fontWeight: 500, color: t.text, margin: 0, flex: 1, lineHeight: 1.15, letterSpacing: "-0.3px" }}>{project.name}</h3>
+          {project.link && (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={hovered ? accent : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hovered ? "translate(2px, -2px)" : "none", flexShrink: 0, marginTop: "4px" }}>
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          )}
+        </div>
+        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.8vw, 13px)", color: accent, margin: "0 0 clamp(10px, 0.9vw, 16px)", letterSpacing: "0.4px", opacity: 0.92 }}>{project.position}</p>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1vw, 16px)", color: t.textMuted, lineHeight: 1.65, margin: 0 }}>{project.desc}</p>
+        {project.stats.length > 0 && (
+          <div style={{ marginTop: "clamp(14px, 1.3vw, 22px)", borderTop: `1px solid ${t.border}`, paddingTop: "clamp(12px, 1.1vw, 18px)", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, 2)}, 1fr)`, gap: "clamp(10px, 1vw, 16px)" }}>
+            {project.stats.map((stat) => (
+              <div key={stat.label}>
+                <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(17px, 1.4vw, 23px)", fontWeight: 600, color: t.text, margin: "0 0 2px" }}>{stat.value}</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(9px, 0.75vw, 12px)", color: t.textDim, margin: 0, letterSpacing: "0.3px" }}>{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
+  const cardStyle = {
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "clamp(14px, 1.1vw, 20px)",
+    background: hovered ? `linear-gradient(160deg, ${accent}12, ${t.cardBg})` : t.cardBg,
+    border: `1px solid ${hovered ? accent + "45" : t.border}`,
+    boxShadow: hovered ? `0 22px 48px -24px ${accent}66` : "0 2px 10px rgba(0,0,0,0.18)",
+    overflow: "hidden",
+    textDecoration: "none",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)",
+    transform: hovered ? "translateY(-4px)" : "none",
+    cursor: project.link ? "pointer" : "default",
+  };
+  const handlers = { onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false) };
+  return project.link ? (
+    <a className="project-card" href={project.link} target="_blank" rel="noopener noreferrer" style={cardStyle} {...handlers}>{inner}</a>
+  ) : (
+    <div className="project-card" style={cardStyle} {...handlers}>{inner}</div>
+  );
+}
+
 function ProjectsSection({ t, isMobile }) {
-  const [hovered, setHovered] = useState(null);
   return (
-    <div style={{ minHeight: "100vh", padding: isMobile ? "80px 16px 100px" : "clamp(80px, 8vw, 140px) clamp(32px, 5vw, 80px)", position: "relative" }}>
-      <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${t.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${t.gridColor} 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)" }} />
-      <div style={{ maxWidth: "1400px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <div style={{ marginBottom: isMobile ? "32px" : "clamp(36px, 4vw, 72px)" }}>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: isMobile ? "10px" : "clamp(10px, 0.85vw, 13px)", color: t.accent, letterSpacing: "1.5px", marginBottom: isMobile ? "10px" : "clamp(10px, 0.9vw, 18px)", textTransform: "uppercase", opacity: 0.85 }}>
+    <div style={{ minHeight: "100vh", padding: isMobile ? "80px 16px 90px" : "clamp(72px, 7vw, 110px) clamp(24px, 4vw, 64px)", position: "relative" }}>
+      <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${t.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${t.gridColor} 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", maskImage: "radial-gradient(ellipse at 50% 25%, black 20%, transparent 75%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 25%, black 20%, transparent 75%)" }} />
+      <div style={{ maxWidth: "1500px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <div style={{ marginBottom: isMobile ? "28px" : "clamp(28px, 3vw, 52px)" }}>
+          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: isMobile ? "10px" : "clamp(10px, 0.85vw, 13px)", color: t.accent, letterSpacing: "1.5px", marginBottom: isMobile ? "10px" : "clamp(10px, 0.9vw, 16px)", textTransform: "uppercase", opacity: 0.85 }}>
             WORK — {PROJECTS.length} PROJECTS
           </p>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 72px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 68px)", fontWeight: 500, color: t.text, margin: 0, lineHeight: 1.1, letterSpacing: "-1px" }}>
             <span style={{ color: t.textDim, fontStyle: "italic" }}>A few</span> more things.
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(clamp(280px, 22vw, 380px), 1fr))", gap: "clamp(10px, 1vw, 20px)", gridAutoFlow: "dense" }}>
-          {PROJECTS.map((project, i) => {
-            const isFeatured = !isMobile && !!project.banner;
-            const card = (
-              <div
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                style={{ borderRadius: "clamp(12px, 1vw, 20px)", background: hovered === i ? `linear-gradient(150deg, ${project.color}08, ${t.cardBg})` : t.cardBg, border: `1px solid ${hovered === i ? project.color + "35" : t.border}`, cursor: project.link ? "pointer" : "default", transition: "all 0.4s cubic-bezier(0.33, 1, 0.68, 1)", transform: hovered === i ? "translateY(-3px)" : "none", display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}
-              >
-                {!project.banner && (
-                  <div style={{ height: "3px", background: `linear-gradient(90deg, ${project.color}70, transparent)`, flexShrink: 0 }} />
-                )}
-                {project.banner && (
-                  <div style={{ width: "100%", aspectRatio: isFeatured ? "4/1" : "3/1", overflow: "hidden", flexShrink: 0 }}>
-                    <img src={project.banner} alt={project.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease", transform: hovered === i ? "scale(1.04)" : "scale(1)" }} />
-                  </div>
-                )}
-                <div style={{ padding: "clamp(18px, 1.8vw, 36px) clamp(20px, 2vw, 40px) clamp(22px, 2.2vw, 44px)", display: "flex", flexDirection: "column", flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "clamp(4px, 0.4vw, 8px)" }}>
-                    <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(18px, 1.6vw, 28px)", fontWeight: 500, color: t.text, margin: 0, flex: 1 }}>{project.name}</h3>
-                    {project.link && (
-                      <svg width="clamp(14px, 1.2vw, 22px)" height="clamp(14px, 1.2vw, 22px)" viewBox="0 0 24 24" fill="none" stroke={hovered === i ? project.color : t.textDim} strokeWidth="2" style={{ transition: "all 0.3s ease", transform: hovered === i ? "translate(2px, -2px)" : "none", flexShrink: 0 }}>
-                        <path d="M7 17L17 7M17 7H7M17 7V17" />
-                      </svg>
-                    )}
-                  </div>
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(10px, 0.85vw, 14px)", color: project.color, margin: "0 0 clamp(10px, 0.9vw, 18px)", letterSpacing: "0.3px", opacity: 0.9 }}>{project.position}</p>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px, 1vw, 17px)", color: t.textMuted, lineHeight: 1.65, margin: "0 0 clamp(12px, 1.1vw, 20px)" }}>{project.desc}</p>
-                  {project.stats.length > 0 && (
-                    <div style={{ marginTop: "auto", borderTop: `1px solid ${t.border}`, paddingTop: "clamp(10px, 1vw, 20px)", display: "grid", gridTemplateColumns: `repeat(${Math.min(project.stats.length, 4)}, 1fr)`, gap: "8px" }}>
-                      {project.stats.map((stat) => (
-                        <div key={stat.label}>
-                          <p style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(16px, 1.4vw, 24px)", fontWeight: 600, color: t.text, margin: "0 0 3px" }}>{stat.value}</p>
-                          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "clamp(9px, 0.78vw, 13px)", color: t.textDim, margin: 0, letterSpacing: "0.3px" }}>{stat.label}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-            const wrapperStyle = { textDecoration: "none", display: "flex", gridColumn: isFeatured ? "span 2" : undefined };
-            return project.link ? (
-              <a key={i} href={project.link} target="_blank" rel="noopener noreferrer" style={wrapperStyle}>{card}</a>
-            ) : (
-              <div key={i} style={{ gridColumn: wrapperStyle.gridColumn }}>{card}</div>
-            );
-          })}
+        <div className="projects-masonry">
+          {PROJECTS.map((project, i) => (
+            <ProjectCard key={i} project={project} t={t} />
+          ))}
         </div>
       </div>
     </div>
@@ -832,6 +853,15 @@ export default function Portfolio() {
         @keyframes fadeSection { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseLeft { 0%, 100% { opacity: 1; transform: translateY(0); } 50% { opacity: 0.5; transform: translateY(4px); } }
         @keyframes pulseGreen { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); } 70% { box-shadow: 0 0 0 6px rgba(16,185,129,0); } }
+
+        /* Pinterest-style masonry: column count steps down with viewport. Add projects by
+           appending objects to the PROJECTS array — cards flow and reflow automatically. */
+        .projects-masonry { column-count: 3; column-gap: 20px; }
+        @media (min-width: 1500px) { .projects-masonry { column-count: 4; } }
+        @media (max-width: 1100px) { .projects-masonry { column-count: 2; } }
+        @media (max-width: 680px)  { .projects-masonry { column-count: 1; column-gap: 0; } }
+        .project-card { break-inside: avoid; -webkit-column-break-inside: avoid; margin-bottom: 20px; width: 100%; }
+        @media (max-width: 680px) { .project-card { margin-bottom: 16px; } }
       `}</style>
       <div style={{ background: t.bg, minHeight: "100vh", color: t.text, position: "relative", transition: "background 0.4s ease, color 0.4s ease" }}>
         {!isMobile && <MouseBlob t={t} />}
